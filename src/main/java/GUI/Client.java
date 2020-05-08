@@ -26,11 +26,11 @@ class Client  {
   private Scanner consoleInput = new Scanner((System.in));
   private controller myController;
 
-
+ // FXMLDocumentController controller
   public Client () throws Exception {
 
     this.setUpNetworking();
-    myController = new controller();
+    loader.get
     String [] args = {""};
     controller.main(args);
     //Stage DummyStage = new Stage();
@@ -135,7 +135,6 @@ class Client  {
 
     //Change UI HERE for descriptions.
     String ItemDesciption = AuctionItemClientSide.get(0).ItemDescription;
-
     try {
       myController.SetDescription1( ItemDesciption);
     } catch (IOException e) {

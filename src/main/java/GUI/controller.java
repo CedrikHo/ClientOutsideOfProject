@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import javax.swing.*;
@@ -27,6 +28,8 @@ public class controller extends Application {
     public PasswordField passwordTextBox;
     @FXML
     public Label Description_1;
+    @FXML
+    public Text Text_Item1;
 
 
     //END OF LOGIN PAGE FXId's
@@ -155,9 +158,10 @@ public void start(Stage primaryStage) throws Exception {
     }
 
     public void SetDescription1( String DescriptionFromServer) throws IOException {
-        Description_1.setText(DescriptionFromServer);
-    }
+        Text_Item1.setText(DescriptionFromServer);
+     // Description_1.setText(DescriptionFromServer);
 
+    }
 
 
     public void BidButton1Clicked(ActionEvent actionEvent) {
