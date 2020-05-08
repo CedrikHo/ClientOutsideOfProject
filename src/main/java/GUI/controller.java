@@ -2,30 +2,37 @@ package GUI;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class controller extends Application {
 
 //Variables tied to FxId to use for action and events
     //LOGIN IN PAGE FXId's
+    @FXML
     public TextField usernameTextBox;
+    @FXML
     public Button Login_Button;
+    @FXML
     public Button GuestButton;
+    @FXML
     public PasswordField passwordTextBox;
-//END OF LOGIN PAGE FXId's
+    @FXML
+    public Label Description_1;
+
+
+    //END OF LOGIN PAGE FXId's
 @Override
 public void start(Stage primaryStage) throws Exception {
     try {
-
       Parent root = FXMLLoader.load( getClass().getResource("/LoginPage.fxml")) ;
         primaryStage.setTitle("BID_WAR");
         primaryStage.setScene(new Scene(root, 1200, 600));
@@ -146,6 +153,11 @@ public void start(Stage primaryStage) throws Exception {
         //Need to reset everything in the program so that it is a new session. This is going to hard to do I think
 
     }
+
+    public void SetDescription1( String DescriptionFromServer) throws IOException {
+        Description_1.setText(DescriptionFromServer);
+    }
+
 
 
     public void BidButton1Clicked(ActionEvent actionEvent) {

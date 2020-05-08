@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
@@ -258,7 +259,7 @@
                               </AnchorPane>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                  <children>
-                                    <TextArea fx:id="Description_1" layoutX="-5.0" layoutY="-2.0" prefHeight="56.0" prefWidth="623.0" text="Description of Item&#10;" />
+                                    <Label fx:id="Description_1" layoutX="14.0" layoutY="6.0" text="Description of Item" wrapText="true" />
                                  </children>
                               </AnchorPane>
                            </items>

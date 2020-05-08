@@ -13,16 +13,10 @@ public class ClientApp  extends Application  {
     @Override // Override the start method in the Application class
     public void start(Stage primaryStage) throws IOException {
         try {
-         Client temp =  new Client();
-            temp.setUpNetworking();
+            new Client();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Parent root = FXMLLoader.load(getClass().getResource("/LoginPage.fxml"));
-        primaryStage.setTitle("BID_WAR");
-        primaryStage.setScene(new Scene(root, 1200, 600));
-        primaryStage.show();
-        //Send over all the descriptions and Maybe Images of the Items I have just built
 
     }
     public static void main(String[] args) {
