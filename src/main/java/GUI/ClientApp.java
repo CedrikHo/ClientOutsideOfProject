@@ -6,19 +6,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+
+
 public class ClientApp  extends Application  {
-    private static controller MyControllerHandle;
     @Override
         public void start(Stage primaryStage) throws Exception {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/LoginPage.fxml"));
                 Parent root = loader.load();
-                MyControllerHandle =   loader.getController();
-
-                    Client C = new Client();
-                MyControllerHandle.setClientForController(C );//tie the client to my cont
-
+                Client C =  new Client();
+                Viewer View = new Viewer( loader.getController(),C ); //Tie the controller and the Client Together
                 primaryStage.setTitle("BID_WAR");
                 primaryStage.setScene(new Scene(root, 1200, 600));
                 primaryStage.show();
@@ -26,10 +23,6 @@ public class ClientApp  extends Application  {
                 e.printStackTrace();
             }
         }
-    public static controller getControllerIwant() {
-        return MyControllerHandle;
-    }
-
 
     public static void main(String[] args) {
         launch(args); //start GUI

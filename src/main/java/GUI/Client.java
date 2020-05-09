@@ -2,6 +2,7 @@ package GUI;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 
 import java.io.*;
@@ -16,18 +17,14 @@ class Client{
   private BufferedReader fromServer;
   protected   PrintWriter toServer;
   private Scanner consoleInput = new Scanner((System.in));
-  private controller cont;
 
 Client () throws Exception {
     USERID++;
-        this.setUpNetworking();
+    this.setUpNetworking();
 }
-        public void InitializeGUI () {
-            //Should send Command to CommandLine of Client. Need to send the specific command "Initialize"
-            //Need to some how tie internal commands to be seen as the input from the command line...
-        }
 
-        protected void sendToServer (String string){
+
+        protected void  sendToServer (String string){
             System.out.println("Sending to server: " + string);
             toServer.println(string);
             toServer.flush();
@@ -60,14 +57,7 @@ Client () throws Exception {
                 public void run() {
                     while (true) {
                      //   String input = consoleInput.nextLine();
-                        try {
-                            Object m = (Message) ois.readObject();
-                            GsonBuilder builder = new GsonBuilder();
-                            Gson gson = builder.create();
-                            sendToServer(gson.toJson(m));
-                        } catch (IOException | ClassNotFoundException a ) {
 
-                        }
 
                     }
                 }
@@ -77,20 +67,20 @@ Client () throws Exception {
         }
         /////////////////////////////////////////////
         //BELOW IS ALL THE METHODS TO READ STUFF FROM SERVER AND HOW TO REACT TO IT.
-        protected void processRequest (String input){
+        protected void processRequest (String input) throws IOException {
             String output = "DefaultMessageIfNoCaseHit";
             Gson gson = new Gson();
             Message message = gson.fromJson(input, Message.class);//Converting Back into a Message
             ParseInputGivenByServer(message.command, message);//This will go to execute task and create response if Needed Use the Output to write back to server
         }
 
+        public void ParseInputGivenByServer (String Commmand, Message OG_MessageFromServer) throws IOException {
 
-        public void ParseInputGivenByServer (String Commmand, Message OG_MessageFromServer){
+
         if(OG_MessageFromServer.command.equals("BIDFROMUSER") || OG_MessageFromServer.MakeChange){
         String newPrice =  Integer.toString(OG_MessageFromServer.number);
-        ClientApp.getControllerIwant().SetDescription1(newPrice);
-            //HERE PLATFORM RUN UI CALL
-    }
+        //HERE PLATFORM RUN UI CALL
+            }
 
             if (Commmand.equals("Initialization")) {
                 InitializeMethod(OG_MessageFromServer);
@@ -103,14 +93,9 @@ Client () throws Exception {
 
     ////METHODS THAT CHANGE THE UI based on info given by the SERVER
         public void InitializeMethod (Message OG_MessageFromServer) {
-            //Place HOLDER for method that modifies Variables on the Client side such as Modifying the UI or his local History.
-            //Here we can update the Descriptions of Every one.
-            //Using OG_MessageFromServer we can reconstruct what was sent over hopefully and use it on this side.
             AuctionItemClientSide = OG_MessageFromServer.ListofAucitonItems;
             String ItemDesciption = AuctionItemClientSide.get(0).ItemDescription;
 
-
-       //     ClientApp.getControllerIwant().SetDescription1(ItemDesciption);
         }
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -133,22 +118,25 @@ Client () throws Exception {
             return Default;
         }
 
-    FileOutputStream out = new FileOutputStream("test.txt");
-    ObjectOutputStream oout = new ObjectOutputStream(out);
-    ObjectInputStream ois = new ObjectInputStream(new FileInputStream("test.txt"));
 
-        public  Message BidButtonHit(int ButtonNumber) throws IOException {
+    public void  BidButtonHit(int ButtonNumber) throws IOException {
             Message BIDFROMUSER = new Message( "BIDFROMUSER", ButtonNumber, USERID, AuctionItemClientSide );
-            return BIDFROMUSER;
+            GsonBuilder builder = new GsonBuilder();
+            Gson gson = builder.create();
+            sendToServer(gson.toJson(BIDFROMUSER));
                     }
-        public void setObj(Message m) throws IOException {
-            oout.writeObject(m);
-        }
 
 
    public static void main (String[]args) throws Exception {
 
     }
 
+    ///NOT SURE WE NEED THIS
+    FileOutputStream out = new FileOutputStream("test.txt");
+    ObjectOutputStream oout = new ObjectOutputStream(out);
+    ObjectInputStream ois = new ObjectInputStream(new FileInputStream("test.txt"));
+    public void setObj(Message m) throws IOException {
+        oout.writeObject(m);
+    }
 
 }
