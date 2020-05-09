@@ -1,6 +1,5 @@
 package GUI;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,12 +10,18 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
 
-public class controller extends Application {
 
-//Variables tied to FxId to use for action and events
+public class controller  {
+
+    private Client ClientForController;
+
+    public void setClientForController(Client clientForController) {
+        ClientForController = clientForController;
+    }
+
+    //Variables tied to FxId to use for action and events
     //LOGIN IN PAGE FXId's
     @FXML
     public TextField usernameTextBox;
@@ -30,30 +35,19 @@ public class controller extends Application {
     public Label Description_1;
     @FXML
     public Text Text_Item1;
+    @FXML
+    public TextField TimeLeft1;
 
-
-    //END OF LOGIN PAGE FXId's
-@Override
-public void start(Stage primaryStage) throws Exception {
-    try {
-      Parent root = FXMLLoader.load( getClass().getResource("/LoginPage.fxml")) ;
-        primaryStage.setTitle("BID_WAR");
-        primaryStage.setScene(new Scene(root, 1200, 600));
-        primaryStage.show();
-    } catch(Exception e) {
-        e.printStackTrace();
+    public controller() throws Exception {
     }
-}
 
-    public static void main(String[] args) {
-        // starts the FX toolkit, instantiates this class,
-        // and calls start(...) on the FX Application thread:
-        launch(args);
+    public void SetDescription1( String DescriptionFromServer) {
+        Description_1.setText(DescriptionFromServer);
     }
+
 
     //Change Scene Method
     public void changeSceenToBidHistory(ActionEvent event) throws IOException {
-
         Parent BidHistory = FXMLLoader.load(getClass().getResource("/BidHistory.fxml"));
         Scene BidHistoryScene = new Scene((BidHistory));
         Stage Window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -61,19 +55,7 @@ public void start(Stage primaryStage) throws Exception {
         Window.show();
     }
 
-    /**
-     * /*
-     * THIS IS A DUMMY EXAMPLE FOR TA
-     */
-    public void changeSceenToBidHistoryDUMMYFORTA(ActionEvent event) throws IOException {
-        //SEND JSON REPSONSE THAT SCENE NEEDS TO BE CHANGED. IN CLIENT HANDLER call this function instead
 
-        Parent BidHistory = FXMLLoader.load(getClass().getResource("/BidHistory.fxml"));
-        Scene BidHistoryScene = new Scene((BidHistory));
-        Stage Window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Window.setScene(BidHistoryScene);
-        Window.show();
-    }
 
     public void changeSceenToMainPage(ActionEvent event) throws IOException {
         Parent MainPage = FXMLLoader.load(getClass().getResource("/RoughDraftFinalProject.fxml"));
@@ -98,7 +80,7 @@ public void start(Stage primaryStage) throws Exception {
             Window.show();
             usernameTextBox.clear();
             passwordTextBox.clear();
-        }
+     }
         else {
             //here need to tell user name is not optional or use Guest
 
@@ -135,14 +117,10 @@ public void start(Stage primaryStage) throws Exception {
      */
 
 
-    public int User_ID_Bank =0;
 
     public void Guest_Button_Clicked(ActionEvent event) throws IOException{
-        //Create a new client to connect to the server with the credentials given.
-        String USER_ID = Integer.toString (User_ID_Bank);
         usernameTextBox.clear();
         passwordTextBox.clear();
-        User_ID_Bank++;//make sure the variable is incremented so we never use same ID again.
         changeSceenToMainPage(event);
     }
     public void LogOutButtonClicked(ActionEvent event) throws IOException{
@@ -154,23 +132,15 @@ public void start(Stage primaryStage) throws Exception {
         Window.setScene(MainPageScene);
         Window.show();
         //Need to reset everything in the program so that it is a new session. This is going to hard to do I think
-
-    }
-
-    public void SetDescription1( String DescriptionFromServer) throws IOException {
-        Text_Item1.setText(DescriptionFromServer);
-     // Description_1.setText(DescriptionFromServer);
-
     }
 
 
-    public void BidButton1Clicked(ActionEvent actionEvent) {
-        //Button clicked
-        //Should share single method for all 5 buttons.
-        //Formulate some sort of JSON response and send to Server.
-        //Server needs to have synchronization so tha that bids can happen at the same time.
-
+    public void ClientBid2(ActionEvent actionEvent) {
     }
+
+    public void BidButton2Clicked(ActionEvent actionEvent) {
+    }
+
 
     public void BidButton3Clicked(ActionEvent actionEvent) {
     }
@@ -190,20 +160,24 @@ public void start(Stage primaryStage) throws Exception {
     public void BidButton5Clicked(ActionEvent actionEvent) {
     }
 
-    public void ClientBid2(ActionEvent actionEvent) {
-    }
-
-    public void BidButton2Clicked(ActionEvent actionEvent) {
-    }
-
-    public void ClientBid1(ActionEvent actionEvent) {
-    }
 
     public void ClientBid6(ActionEvent actionEvent) {
     }
 
     public void BidButton6Clicked(ActionEvent actionEvent) {
     }
+
+    public void BidButton1Clicked(ActionEvent actionEvent) throws Exception {
+    Client c = new Client();
+    c.BidButtonHit(1);
+        Message BIDFROMUSER = new Message("BIDFROMUSER", 1, Client.USERID, Client.AuctionItemClientSide);
+        c.setObj(BIDFROMUSER);
+    }
+
+    public void ClientBid1(ActionEvent actionEvent) {
+    }
+
+
 }
 
 

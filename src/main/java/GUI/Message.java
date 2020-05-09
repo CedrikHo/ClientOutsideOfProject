@@ -1,8 +1,9 @@
 package GUI;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Message {
+public class Message implements Serializable {
   String command;
   String input;
   int number;
@@ -10,6 +11,9 @@ public class Message {
   ArrayList<AuctionItem> ListofAucitonItems;
   int USERID;
   boolean MakeChange;
+  int AuctionID;
+  AuctionItem A;
+  protected Message() {}
 
   protected Message(String type , int USERID , AuctionItem Item) {
     this.USERID = USERID;
@@ -46,7 +50,7 @@ public class Message {
   }
 
 
-  public Message(String type) {
+  public Message(String type ) {
     this.command = type;
     this.input = null;
     this.USERID = 0;
@@ -67,6 +71,18 @@ public class Message {
     this.Item = null;
     this.MakeChange = false;
     this.ListofAucitonItems =listofAucitonItems;
+    System.out.println("Client side message");}
+
+  public Message(String type, int AuctionID ,int USERID , ArrayList<AuctionItem> listofAucitonItems) {
+    this.AuctionID=AuctionID;
+    this.command = type;
+    this.input = null;
+    this.USERID = USERID;
+    this.input = "";
+    this.number = 0;
+    this.Item = null;
+    this.MakeChange = false;
+    this.ListofAucitonItems=listofAucitonItems;
     System.out.println("Client side message");}
 
 
