@@ -18,8 +18,12 @@ public class ClientApp  extends Application  {
                 Parent root = loader.load();
                 Client C =  new Client(loader.getController());
                 View = new Viewer( loader.getController(),C ); //Tie the controller and the Client Together
+
+                //Try and trick Log in to set up a page by creating new scene and when button is clicked move on
+
+
                 primaryStage.setTitle("BID_WAR");
-                primaryStage.setScene(new Scene(root, 1200, 600));
+                primaryStage.setScene(new Scene(root, 820, 600));
                 primaryStage.show();
             } catch(Exception e) {
                 e.printStackTrace();
