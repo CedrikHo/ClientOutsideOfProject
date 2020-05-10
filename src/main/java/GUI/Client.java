@@ -115,6 +115,12 @@ class Client {
         //update VALID INVALID BID (USERID, makeChange field from Message class)
         //update WINNER ID (sold status and Winner id filed from AuctionItem class)
         Mycontroller.SetMessageToUser1("No Message",  false);
+        Mycontroller.SetMessageToUser2("No Message",  false);
+        Mycontroller.SetMessageToUser3("No Message",  false);
+        Mycontroller.SetMessageToUser4("No Message",  false);
+        Mycontroller.SetMessageToUser5("No Message",  false);
+        Mycontroller.SetMessageToUser6("No Message",  false);
+
         if (OG_MessageFromServer.command.equals("BIDFROMUSER")) {
             double newPrice = OG_MessageFromServer.BidPrice;
           int USERID_of_Person_Who_Bid =  OG_MessageFromServer.USERID;
@@ -142,10 +148,83 @@ class Client {
                     }
                     break;
                 case 1:
-                    // code block
+                    Mycontroller.SetMessageToUser2("No Message",  false);
+                    if(OG_MessageFromServer.MakeChange ) {
+                        Mycontroller.Setcurrent_bid_2(newPrice);
+                        if (ItemThatWasBidOn.Sold ) {//update UI for the SOLD category
+                            String terminationMessage = "SOLD";
+                            Mycontroller.SetSold2(terminationMessage);
+                            Mycontroller.SetWinner2(Integer.toString(USERID_of_Person_Who_Bid));
+                            Mycontroller.Setcurrent_bid_2(newPrice);
+                        }
+                    }
+                    if(OG_MessageFromServer.tooLow ){
+                        //Warning that MinPrice is Too low
+                        Mycontroller.SetMessageToUser2("REJECTED, BID TO LOW",  true);
+                    }
+                    if(OG_MessageFromServer.AlreadySold){
+                        Mycontroller.SetMessageToUser2("SOLD ALREADY!", true);
+                    }
+                    break;
+                case 2:
+                    Mycontroller.SetMessageToUser3("No Message",  false);
+                    if(OG_MessageFromServer.MakeChange ) {
+                        Mycontroller.Setcurrent_bid_3(newPrice);
+                        if (ItemThatWasBidOn.Sold ) {//update UI for the SOLD category
+                            String terminationMessage = "SOLD";
+                            Mycontroller.SetSold3(terminationMessage);
+                            Mycontroller.SetWinner3(Integer.toString(USERID_of_Person_Who_Bid));
+                            Mycontroller.Setcurrent_bid_3(newPrice);
+                        }
+                    }
+                    if(OG_MessageFromServer.tooLow ){
+                        //Warning that MinPrice is Too low
+                        Mycontroller.SetMessageToUser3("REJECTED, BID TO LOW",  true);
+                    }
+                    if(OG_MessageFromServer.AlreadySold){
+                        Mycontroller.SetMessageToUser3("SOLD ALREADY!", true);
+                    }
+                    break;
+
+                case 3:
+                    Mycontroller.SetMessageToUser4("No Message",  false);
+                    if(OG_MessageFromServer.MakeChange ) {
+                        Mycontroller.Setcurrent_bid_4(newPrice);
+                        if (ItemThatWasBidOn.Sold ) {//update UI for the SOLD category
+                            String terminationMessage = "SOLD";
+                            Mycontroller.SetSold4(terminationMessage);
+                            Mycontroller.SetWinner4(Integer.toString(USERID_of_Person_Who_Bid));
+                            Mycontroller.Setcurrent_bid_4(newPrice);
+                        }
+                    }
+                    if(OG_MessageFromServer.tooLow ){
+                        //Warning that MinPrice is Too low
+                        Mycontroller.SetMessageToUser4("REJECTED, BID TO LOW",  true);
+                    }
+                    if(OG_MessageFromServer.AlreadySold){
+                        Mycontroller.SetMessageToUser4("SOLD ALREADY!", true);
+                    }
+                    break;
+
+                case 4:Mycontroller.SetMessageToUser5("No Message",  false);
+                    if(OG_MessageFromServer.MakeChange ) {
+                        Mycontroller.Setcurrent_bid_5(newPrice);
+                        if (ItemThatWasBidOn.Sold ) {//update UI for the SOLD category
+                            String terminationMessage = "SOLD";
+                            Mycontroller.SetSold5(terminationMessage);
+                            Mycontroller.SetWinner5(Integer.toString(USERID_of_Person_Who_Bid));
+                            Mycontroller.Setcurrent_bid_5(newPrice);
+                        }
+                    }
+                    if(OG_MessageFromServer.tooLow ){
+                        //Warning that MinPrice is Too low
+                        Mycontroller.SetMessageToUser5("REJECTED, BID TO LOW",  true);
+                    }
+                    if(OG_MessageFromServer.AlreadySold) {
+                        Mycontroller.SetMessageToUser5("SOLD ALREADY!", true);
+                    }
                     break;
                 default:
-                    // code block
             }
 
         }
@@ -310,15 +389,14 @@ class Client {
             String command = "KICKOFF";
             //String type, int AuctionID, int USERID, ArrayList<AuctionItem> listofAucitonItems, double BidPrice)
             Message InitialMessageToGetGUI = new Message(command,DefaultActionID, DefaultUSERID,DummyAuctionList, DefaultBidPrice);
-            MessageGoingOutCurrently =InitialMessageToGetGUI;
-            return MessageGoingOutCurrently;
+
+            return InitialMessageToGetGUI;
         }
 
         if (Commmand.equals("Initialization")) {
             String command = "Initialization_WAS_RECEIVED_AND_SHOULD_BE_COMPLETE";
             Message ConfirmationMessageofGUIKickoff = new Message(command,DefaultActionID, DefaultUSERID,DummyAuctionList, DefaultBidPrice);
-            MessageGoingOutCurrently = ConfirmationMessageofGUIKickoff;
-            return MessageGoingOutCurrently;
+            return ConfirmationMessageofGUIKickoff;
         }
         if (Commmand.equals("BIDFROMUSER")) {
             return MessageGoingOutCurrently;//Because already built earlier in our function dealing wit Button Clicks
@@ -333,10 +411,10 @@ class Client {
 //////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 
-    static Message MessageGoingOutCurrently;//The sole message being send out. Each Client is only sending one message at a time anyways
+  static Message MessageGoingOutCurrently;//The sole message being send out. Each Client is only sending one message at a time anyways
     //so Static reference is of no worries.
 //Handler for controller class for A Bid Button Being hit.
-    public static void  BidButtonHit (int ButtonNumber, String BidPrice_string)  {
+    public static void BidButtonHit (int ButtonNumber, String BidPrice_string)  {
         double BidPrice=0.0;
         if(BidPrice_string.equals("")){  return; }
 

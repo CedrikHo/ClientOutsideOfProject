@@ -151,8 +151,7 @@ public class controller {
 
     /////////////////////////////////ITEM 2/////////////////////////
     public void BidButtonClicked2(ActionEvent actionEvent) throws Exception {
-
-        Client.BidButtonHit(2 , yourbid_1.getText());
+        Client.BidButtonHit(2 , yourbid_2.getText());
     }
     public void SetMessageToUser2(String ErrorMessage , boolean sw ){
         MessageToUser2.setText(ErrorMessage);
@@ -178,8 +177,7 @@ public class controller {
     /////////////////////////////////ITEM 3/////////////////////////
 
     public void BidButtonClicked3(ActionEvent actionEvent) throws Exception {
-
-        Client.BidButtonHit(3 , yourbid_1.getText());
+        Client.BidButtonHit(3 , yourbid_3.getText());
     }
     public void SetMessageToUser3(String ErrorMessage , boolean sw ){
         MessageToUser3.setText(ErrorMessage);
@@ -203,7 +201,7 @@ public class controller {
 
     public void BidButtonClicked4(ActionEvent actionEvent) throws Exception {
 
-        Client.BidButtonHit(4 , yourbid_1.getText());
+        Client.BidButtonHit(4 , yourbid_4.getText());
     }
 
     public void SetMessageToUser4(String ErrorMessage , boolean sw ){
@@ -215,7 +213,7 @@ public class controller {
         current_bid_4.setText(Double.toString(newPrice));
     }
     public void SetSold4(String terminationMessage) {
-        Sold1.setText(terminationMessage);
+        Sold4.setText(terminationMessage);
     }
     public void SetWinner4(String winnerID) {
         Winner4.setText(winnertxt + winnerID  );
@@ -228,7 +226,7 @@ public class controller {
 
     public void BidButtonClicked5(ActionEvent actionEvent) throws Exception {
 
-        Client.BidButtonHit(5, yourbid_1.getText());
+        Client.BidButtonHit(5, yourbid_5.getText());
     }
 
     public void SetMessageToUser5(String ErrorMessage , boolean sw ){
@@ -254,7 +252,7 @@ public class controller {
 
 public void BidButtonClicked6(ActionEvent actionEvent) throws Exception {
 
-    Client.BidButtonHit(6, yourbid_1.getText());
+    Client.BidButtonHit(6, yourbid_6.getText());
 }
 
     public void SetMessageToUser6(String ErrorMessage , boolean sw ){
