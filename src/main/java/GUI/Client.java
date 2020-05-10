@@ -94,7 +94,6 @@ class Client {
     }
 
 
-
     /////////////////////////////////////////////
     //BELOW IS ALL THE METHODS TO READ STUFF FROM SERVER AND HOW TO REACT TO IT.
     protected void processRequest(String input) throws IOException {
@@ -105,27 +104,44 @@ class Client {
         ParseInputGivenByServer(message.command, message);//This will go to execute task and create response if Needed Use the Output to write back to server
     }
 
+
+
+    public ArrayList<AuctionItem> localAuctionList;
     public void ParseInputGivenByServer(String Commmand, Message OG_MessageFromServer) throws IOException {
+        localAuctionList =OG_MessageFromServer.ListofAucitonItems; //Copy servers list to my list
         System.out.println("valid bid has been hit and would update here");//DEBUG
         //Parse The Auction list for the item based on the Unique Number given back. Now update UI based on options
         //update SOLD UNSOLD (sold parameter of Auction Item)
         //update VALID INVALID BID (USERID, makeChange field from Message class)
         //update WINNER ID (sold status and Winner id filed from AuctionItem class)
-
-        if (OG_MessageFromServer.command.equals("BIDFROMUSER")) { double newPrice = OG_MessageFromServer.BidPrice;
+        Mycontroller.SetMessageToUser1("No Message",  false);
+        if (OG_MessageFromServer.command.equals("BIDFROMUSER")) {
+            double newPrice = OG_MessageFromServer.BidPrice;
           int USERID_of_Person_Who_Bid =  OG_MessageFromServer.USERID;
           AuctionItem ItemThatWasBidOn = OG_MessageFromServer.ListofAucitonItems.get(OG_MessageFromServer.AuctionID);
           int ItemThatWasBidOn_AuctionID = OG_MessageFromServer.AuctionID;
 
-            switch(USERID_of_Person_Who_Bid) {
-                case 1:   Mycontroller.Setcurrent_bid_1(newPrice);//Update Price UI
-                    if (ItemThatWasBidOn.Sold){//update UI for the SOLD category
+            switch(ItemThatWasBidOn_AuctionID) {
+                case 0:
+                    Mycontroller.SetMessageToUser1("No Message",  false);
+                    if(OG_MessageFromServer.MakeChange ) {
+                    Mycontroller.Setcurrent_bid_1(newPrice);
+                        if (ItemThatWasBidOn.Sold ) {//update UI for the SOLD category
                         String terminationMessage = "SOLD";
                         Mycontroller.SetSold1(terminationMessage);
-                        Mycontroller.SetWinner1(   Integer.toString(USERID_of_Person_Who_Bid));
+                        Mycontroller.SetWinner1(Integer.toString(USERID_of_Person_Who_Bid));
+                        Mycontroller.Setcurrent_bid_1(newPrice);
+                    }
+                        }
+                    if(OG_MessageFromServer.tooLow ){
+                        //Warning that MinPrice is Too low
+                        Mycontroller.SetMessageToUser1("REJECTED, BID TO LOW",  true);
+                    }
+                    if(OG_MessageFromServer.AlreadySold){
+                        Mycontroller.SetMessageToUser1("SOLD ALREADY!", true);
                     }
                     break;
-                case 2:
+                case 1:
                     // code block
                     break;
                 default:
@@ -155,6 +171,19 @@ class Client {
         AuctionItemClientSide = OG_MessageFromServer.ListofAucitonItems;
         String ItemDesciption = AuctionItemClientSide.get(0).ItemDescription;
         Mycontroller.SetDescription1(ItemDesciption);
+
+        if (AuctionItemClientSide.get(0).Sold) {//update UI for the SOLD category
+            Mycontroller.SetSold1("SOLD");
+            Mycontroller.SetWinner1(Integer.toString(AuctionItemClientSide.get(0).WinnerID));
+        }
+
+        else{ Mycontroller.SetSold1("UNSOLD");
+            Mycontroller.SetWinner1("None");}
+
+        Mycontroller.Setcurrent_bid_1(AuctionItemClientSide.get(0).CurrentBid);
+        Mycontroller.SetMinPrice_1(AuctionItemClientSide.get(0).MinPrice);
+        Mycontroller.SetMessageToUser1("No Message",  false);
+
         String ItemDesciption1 = AuctionItemClientSide.get(1).ItemDescription;
         Mycontroller.SetDescription2(ItemDesciption1);
         String ItemDesciption2 = AuctionItemClientSide.get(2).ItemDescription;
@@ -178,6 +207,9 @@ class Client {
         Mycontroller.SetItem5(SetItem5);
         String SetItem6 = AuctionItemClientSide.get(5).ItemName;
         Mycontroller.SetItem6(SetItem6);
+
+
+
 
     }
     ///////////////////////////////////////////////////////////////////////////////

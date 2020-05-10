@@ -14,7 +14,7 @@ public class Message {
   boolean tooLow;
   boolean Sold;
   double BidPrice;
-
+  boolean AlreadySold;
   /*
     public Message(String type) {
       this.command = type;
@@ -38,6 +38,7 @@ public class Message {
     this.Item = null;
     this.MakeChange = false;
     this.BidPrice = BidPrice;
+    this.AlreadySold = AlreadySold;
     this.ListofAucitonItems = listofAucitonItems;
     System.out.println("Client side message");
   }

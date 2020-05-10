@@ -49,7 +49,14 @@ public class controller {
     public Text current_bid_1;
     public Text Sold_1;
     public Text Winner1;
+    public Text MinPrice1;
+    public Text MessageToUser1;
 
+    public void SetMessageToUser1(String ErrorMessage , boolean sw ){
+        MessageToUser1.setText(ErrorMessage);
+        MessageToUser1.setVisible(sw);
+    }
+    public void  ClientBid1 (ActionEvent actionEvent) throws Exception {}
     @FXML
     public void BidButton1Clicked(ActionEvent actionEvent) throws Exception {
 
@@ -61,8 +68,12 @@ public class controller {
     public void SetSold1(String terminationMessage) {
         Sold_1.setText(terminationMessage);
     }
+     String winnertxt = "WinnerID: ";
     public void SetWinner1(String winnerID) {
-        Winner1.setText(winnerID);
+        Winner1.setText(winnertxt + winnerID  );
+    }
+    public void SetMinPrice_1(double minPrice) {
+        MinPrice1.setText(Double.toString(minPrice));
     }
 
     @FXML

@@ -245,25 +245,27 @@
                                  <children>
                                     <HBox prefHeight="59.0" prefWidth="618.0">
                                        <children>
-                                          <Button fx:id="Bid_button_1" graphicTextGap="2.0" mnemonicParsing="false" onAction="#BidButton1Clicked" prefHeight="42.0" prefWidth="131.0" style="-fx-background-color: orange;" text="Bid" HBox.hgrow="ALWAYS" />
-                                          <TextField fx:id="yourbid_1" onAction="#ClientBid1" prefHeight="35.0" prefWidth="172.0" promptText="your Bid" HBox.hgrow="ALWAYS">
+                                          <Button fx:id="Bid_button_1" graphicTextGap="2.0" mnemonicParsing="false" onAction="#BidButton1Clicked" prefHeight="42.0" prefWidth="187.0" style="-fx-background-color: orange;" text="Bid" HBox.hgrow="ALWAYS" />
+                                          <TextField fx:id="yourbid_1" onAction="#ClientBid1" prefHeight="35.0" prefWidth="223.0" promptText="your Bid" HBox.hgrow="ALWAYS">
                                              <effect>
                                                 <Bloom threshold="1.0" />
                                              </effect>
                                           </TextField>
-                                          <Text smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text=" current bid" wrappingWidth="75.4700927734375">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Text>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Text fx:id="current_bid_1" layoutX="66.0" layoutY="18.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text=" current bid" wrappingWidth="89.4700927734375" />
+                                                <Text layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Current Bid: " />
+                                             </children>
+                                          </AnchorPane>
                                           <Region prefHeight="59.0" prefWidth="68.0" />
-                                          <Text smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Min Price" wrappingWidth="100.35911560058594">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Text fx:id="MinPrice1" layoutX="66.0" layoutY="19.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Min Price" wrappingWidth="100.35911560058594" />
+                                                <Text layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MinPrice: " />
+                                             </children>
+                                          </AnchorPane>
                                           <Region prefHeight="59.0" prefWidth="39.0" />
-                                          <Text smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSOLD" wrappingWidth="239.0255889892578">
+                                          <Text fx:id="Sold_1" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSOLD" wrappingWidth="129.6922149658203">
                                              <font>
                                                 <Font size="20.0" />
                                              </font>
@@ -275,6 +277,10 @@
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                  <children>
                                     <Text fx:id="Description1" layoutX="20.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="415.91447830200195" />
+                                    <Text fx:id="MessageToUser1" fill="#db1111" layoutX="309.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="244.8033447265625">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font></Text>
                                  </children>
                               </AnchorPane>
                            </items>
@@ -282,7 +288,8 @@
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <Text fx:id="Text_Item1" layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="88.80340576171875" />
-                              <Text layoutX="14.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WinnerID:" wrappingWidth="101.247802734375" />
+                              <Text fx:id="Winner1" layoutX="14.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WinnerID:" wrappingWidth="101.247802734375" />
+                              <Text layoutX="14.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                            </children>
                         </AnchorPane>
                      </children>
