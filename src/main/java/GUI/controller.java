@@ -1,21 +1,19 @@
 package GUI;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 
 public class controller  {
@@ -91,6 +89,7 @@ public class controller  {
     public Text BuyItnow6;
 
 
+
     public void SetWinner1(String winnerID) {
         Winner1.setText(winnertxt + winnerID  );
     }
@@ -147,8 +146,10 @@ public class controller  {
     }
     public void  ClientBid1 (ActionEvent actionEvent) throws Exception {}
     @FXML
+    String path = this.getClass().getResource("/sound.mp3").toString();
+    AudioClip mediaPlayerGoodbye = new AudioClip(path);
     public void BidButtonClicked1(ActionEvent actionEvent) throws Exception {
-
+        mediaPlayerGoodbye.play();
         Client.BidButtonHit(1 , yourbid_1.getText());
     }
     public void Setcurrent_bid_1(double newPrice){
@@ -354,7 +355,7 @@ public void BidButtonClicked6(ActionEvent actionEvent) throws Exception {
     @FXML
     public void Login_Button_Clicked(ActionEvent event) throws IOException {
         if (usernameTextBox.getText() == null || usernameTextBox.getText().trim().isEmpty()) {
-            Parent view2 = FXMLLoader.load(getClass().getResource("/RoughDraftFinalProject.fxml"));
+            Parent view2 = FXMLLoader.load(getClass().getResource("/resources/RoughDraftFinalProject.fxml"));
             Scene scene2 = new Scene(view2);
 
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
