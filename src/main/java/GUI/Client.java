@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.sun.javafx.image.IntPixelGetter;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -80,7 +81,7 @@ class Client {
                     Scanner scanner = new Scanner(System.in);
                     String input = scanner.nextLine();
                     if (!input.equals("NoCommand")) {
-                        Message MessageSpecificToTheCommand = CreateMessageBasedOnCommand(input);
+                       Message MessageSpecificToTheCommand = CreateMessageBasedOnCommand(input);
                         GsonBuilder builder = new GsonBuilder();
                         Gson gson = builder.create();
                         sendToServer(gson.toJson(MessageSpecificToTheCommand));
@@ -105,21 +106,36 @@ class Client {
     }
 
     public void ParseInputGivenByServer(String Commmand, Message OG_MessageFromServer) throws IOException {
+        System.out.println("valid bid has been hit and would update here");//DEBUG
+        //Parse The Auction list for the item based on the Unique Number given back. Now update UI based on options
+        //update SOLD UNSOLD (sold parameter of Auction Item)
+        //update VALID INVALID BID (USERID, makeChange field from Message class)
+        //update WINNER ID (sold status and Winner id filed from AuctionItem class)
 
-        if (OG_MessageFromServer.command.equals("BIDFROMUSER")) {
-            //Parse The Auction list for the item based on the Unique Number given back. Now update UI based on options
-            //update SOLD UNSOLD (sold parameter of Auction Item)
-            //update VALID INVALID BID (USERID, makeChange field from Message class)
-            //update CURRENT BID ( CurrentBid because should have been updated on server side already from AuctionItem)
-            //update WINNER ID (sold status and Winner id filed from AuctionItem class)
+        if (OG_MessageFromServer.command.equals("BIDFROMUSER")) { double newPrice = OG_MessageFromServer.BidPrice;
+          int USERID_of_Person_Who_Bid =  OG_MessageFromServer.USERID;
+          AuctionItem ItemThatWasBidOn = OG_MessageFromServer.ListofAucitonItems.get(OG_MessageFromServer.AuctionID);
+          int ItemThatWasBidOn_AuctionID = OG_MessageFromServer.AuctionID;
 
+            switch(USERID_of_Person_Who_Bid) {
+                case 1:   Mycontroller.Setcurrent_bid_1(newPrice);//Update Price UI
+                    if (ItemThatWasBidOn.Sold){//update UI for the SOLD category
+                        String terminationMessage = "SOLD";
+                        Mycontroller.SetSold1(terminationMessage);
+                        Mycontroller.SetWinner1(   Integer.toString(USERID_of_Person_Who_Bid));
+                    }
+                    break;
+                case 2:
+                    // code block
+                    break;
+                default:
+                    // code block
+            }
 
-            //UI calls will work according to what is necessary based on Mesasge and updated fields in AuctionItem Object in the ArrayList
         }
 
         if (Commmand.equals("Initialization")) {
             InitializeMethod(OG_MessageFromServer);
-            // CreateResponsePackge("Initialization");
         }
     }
 
@@ -167,26 +183,30 @@ class Client {
     ///////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////
 
-
+    public static  ArrayList<AuctionItem>  DummyAuctionList=null;
+    public static final int DefaultBidPrice =-1;
+    public static final int DefaultUSERID =-1;
+    public static final int DefaultActionID = -1;
     public  static Message CreateMessageBasedOnCommand(String Commmand) {
         if (Commmand.equals("KICKOFF")) { //Method to Write back to
-            String words = "KICKOFF";
-            Message InitialMessageToGetGUI = new Message(words);
+            String command = "KICKOFF";
+            //String type, int AuctionID, int USERID, ArrayList<AuctionItem> listofAucitonItems, double BidPrice)
+            Message InitialMessageToGetGUI = new Message(command,DefaultActionID, DefaultUSERID,DummyAuctionList, DefaultBidPrice);
             MessageGoingOutCurrently =InitialMessageToGetGUI;
             return MessageGoingOutCurrently;
         }
 
         if (Commmand.equals("Initialization")) {
-            String words = "Initialization_WAS_RECEIVED_AND_SHOULD_BE_COMPLETE";
-            Message ConfirmationMessageofGUIKickoff = new Message(words);
+            String command = "Initialization_WAS_RECEIVED_AND_SHOULD_BE_COMPLETE";
+            Message ConfirmationMessageofGUIKickoff = new Message(command,DefaultActionID, DefaultUSERID,DummyAuctionList, DefaultBidPrice);
             MessageGoingOutCurrently = ConfirmationMessageofGUIKickoff;
             return MessageGoingOutCurrently;
         }
-
         if (Commmand.equals("BIDFROMUSER")) {
             return MessageGoingOutCurrently;//Because already built earlier in our function dealing wit Button Clicks
         }
-        Message Default_Message = new Message("NO_MESSAGE_WAS_CREATED");
+        Message Default_Message  = new Message("NO_MESSAGE_WAS_CREATED",DefaultActionID, DefaultUSERID,DummyAuctionList,  DefaultBidPrice);
+
         return Default_Message;
     }
 
@@ -208,9 +228,9 @@ class Client {
         } else if (isDouble(BidPrice_string)){
             BidPrice = Double.parseDouble(BidPrice_string);
         }
-        String Command = "BIDFROMUSE";
-        int UniqueID = AuctionItemClientSide.get(ButtonNumber-1).UniqueID;//get Auction ID to know what object
-        MessageGoingOutCurrently = new Message(Command, UniqueID, USERID, AuctionItemClientSide, BidPrice);
+        String Command = "BIDFROMUSER";
+        int ActionID = AuctionItemClientSide.get(ButtonNumber-1).UniqueID;//get Auction ID to know what object
+        MessageGoingOutCurrently = new Message(Command, ActionID, USERID, AuctionItemClientSide, BidPrice);
         commandPasedToConsole= "BIDFROMUSER";
     }
     public static boolean isInteger(String s) {

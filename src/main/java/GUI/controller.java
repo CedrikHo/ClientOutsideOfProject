@@ -46,14 +46,23 @@ public class controller {
 
     public TextField yourbid_1;
     public Button Bid_button_1;
+    public Text current_bid_1;
+    public Text Sold_1;
+    public Text Winner1;
 
     @FXML
     public void BidButton1Clicked(ActionEvent actionEvent) throws Exception {
 
         Client.BidButtonHit(1 , yourbid_1.getText());
     }
-    @FXML
-    public void ClientBid1(ActionEvent actionEvent) {
+    public void Setcurrent_bid_1(double newPrice){
+        current_bid_1.setText(Double.toString(newPrice));
+    }
+    public void SetSold1(String terminationMessage) {
+        Sold_1.setText(terminationMessage);
+    }
+    public void SetWinner1(String winnerID) {
+        Winner1.setText(winnerID);
     }
 
     @FXML

@@ -251,7 +251,7 @@
                                                 <Bloom threshold="1.0" />
                                              </effect>
                                           </TextField>
-                                          <Text smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text=" current bid" wrappingWidth="75.4700927734375">
+                                          <Text fx:id="current_bid_1" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text=" current bid" wrappingWidth="75.4700927734375">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
@@ -263,7 +263,7 @@
                                              </font>
                                           </Text>
                                           <Region prefHeight="59.0" prefWidth="39.0" />
-                                          <Text smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSOLD" wrappingWidth="239.0255889892578">
+                                          <Text fx:id="Sold_1" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSOLD" wrappingWidth="239.0255889892578">
                                              <font>
                                                 <Font size="20.0" />
                                              </font>
@@ -282,7 +282,7 @@
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <Text fx:id="Text_Item1" layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="88.80340576171875" />
-                              <Text layoutX="14.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WinnerID:" wrappingWidth="101.247802734375" />
+                              <Text fx:id="Winner1" layoutX="14.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WinnerID:" wrappingWidth="101.247802734375" />
                            </children>
                         </AnchorPane>
                      </children>
