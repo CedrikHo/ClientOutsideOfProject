@@ -87,9 +87,10 @@
                         </SplitPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Text fx:id="Text_Item1" layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="88.80340576171875" />
+                              <Text fx:id="Text_Item1" layoutX="11.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="88.80340576171875" />
                               <Text fx:id="Winner1" layoutX="14.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WinnerID:" wrappingWidth="101.247802734375" />
                               <Text layoutX="14.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <Text fx:id="BuyItnow1" layoutX="11.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="93.4700927734375" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -145,9 +146,10 @@
                         </SplitPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Text fx:id="Text_Item2" layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="88.80340576171875" />
+                              <Text fx:id="Text_Item2" layoutX="11.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="88.80340576171875" />
                               <Text fx:id="Winner2" layoutX="14.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WinnerID:" wrappingWidth="101.247802734375" />
                               <Text layoutX="14.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <Text fx:id="BuyItnow2" layoutX="11.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="107.47003173828125" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -203,9 +205,10 @@
                         </SplitPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Text fx:id="Text_Item3" layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="88.80340576171875" />
+                              <Text fx:id="Text_Item3" layoutX="11.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="88.80340576171875" />
                               <Text fx:id="Winner3" layoutX="14.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WinnerID:" wrappingWidth="101.247802734375" />
                               <Text layoutX="14.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <Text fx:id="BuyItnow3" layoutX="11.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="107.47003173828125" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -261,9 +264,10 @@
                         </SplitPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Text fx:id="Text_Item4" layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="88.80340576171875" />
+                              <Text fx:id="Text_Item4" layoutX="11.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="88.80340576171875" />
                               <Text fx:id="Winner4" layoutX="14.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WinnerID:" wrappingWidth="101.247802734375" />
                               <Text layoutX="14.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <Text fx:id="BuyItnow4" layoutX="11.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="107.47003173828125" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -319,9 +323,10 @@
                         </SplitPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Text fx:id="Text_Item5" layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="88.80340576171875" />
+                              <Text fx:id="Text_Item5" layoutX="11.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="88.80340576171875" />
                               <Text fx:id="Winner5" layoutX="14.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WinnerID:" wrappingWidth="101.247802734375" />
                               <Text layoutX="14.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <Text fx:id="BuyItnow5" layoutX="11.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="107.47003173828125" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -377,9 +382,10 @@
                         </SplitPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Text fx:id="Text_Item6" layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="88.80340576171875" />
+                              <Text fx:id="Text_Item6" layoutX="11.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="88.80340576171875" />
                               <Text fx:id="Winner6" layoutX="14.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WinnerID:" wrappingWidth="101.247802734375" />
                               <Text layoutX="14.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <Text fx:id="BuyItnow6" layoutX="11.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="107.47003173828125" />
                            </children>
                         </AnchorPane>
                      </children>

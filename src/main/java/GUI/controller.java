@@ -18,11 +18,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class controller implements Initializable {
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        
-    }
+public class controller  {
+
     //Variables tied to FxId to use for action and events
     //LOGIN IN PAGE FXId's
     public TextField usernameTextBox;
@@ -84,8 +81,15 @@ public class controller implements Initializable {
     public Text Sold6;
     public Text MessageToUser6;
     public Text Winner6;
+    public Text BuyItnow1;
 
     String winnertxt = "WinnerID: ";
+    public Text BuyItnow2;
+    public Text BuyItnow3;
+    public Text BuyItnow4;
+    public Text BuyItnow5;
+    public Text BuyItnow6;
+
 
     public void SetWinner1(String winnerID) {
         Winner1.setText(winnertxt + winnerID  );
@@ -279,8 +283,28 @@ public void BidButtonClicked6(ActionEvent actionEvent) throws Exception {
         MinPrice6.setText(Double.toString(minPrice));
     }
 
+///////////////Initilize all BUY NOW////////////////////////////
+    String BuyNow = "Buy Now ";
+    public void setBuyItnow1(double buyItnow) {
+        BuyItnow1.setText( BuyNow + buyItnow);
+    }
+    public void setBuyItnow2(double buyItnow) {
+        BuyItnow2.setText( BuyNow + buyItnow);
+    }
+    public void setBuyItnow3(double buyItnow) {
+        BuyItnow3.setText( BuyNow + buyItnow);
+    }
+    public void setBuyItnow4(double buyItnow) {
+        BuyItnow4.setText( BuyNow + buyItnow);
+    }
+    public void setBuyItnow5(double buyItnow) {
+        BuyItnow5.setText( BuyNow + buyItnow);
+    }
+    public void setBuyItnow6(double buyItnow) {
+        BuyItnow6.setText( BuyNow + buyItnow);
+    }
 
-
+////////////////////////////////////////////////////
 
 
 
@@ -383,8 +407,6 @@ public void BidButtonClicked6(ActionEvent actionEvent) throws Exception {
         //Got back to the main page.
         //Need to reset everything in the program so that it is a new session. This is going to hard to do I think
     }
-
-
 
 
 /*

@@ -225,6 +225,23 @@ class Client {
                         Mycontroller.SetMessageToUser5("SOLD ALREADY!", true);
                     }
                     break;
+                case 5: Mycontroller.SetMessageToUser6("No Message",  false);
+                    if(OG_MessageFromServer.MakeChange ) {
+                        Mycontroller.Setcurrent_bid_6(newPrice);
+                        if (ItemThatWasBidOn.Sold ) {//update UI for the SOLD category
+                            String terminationMessage = "SOLD";
+                            Mycontroller.SetSold6(terminationMessage);
+                            Mycontroller.SetWinner6(Integer.toString(USERID_of_Person_Who_Bid));
+                            Mycontroller.Setcurrent_bid_6(newPrice);
+                        }
+                    }
+                    if(OG_MessageFromServer.tooLow ){
+                        //Warning that MinPrice is Too low
+                        Mycontroller.SetMessageToUser6("REJECTED, BID TO LOW",  true);
+                    }
+                    if(OG_MessageFromServer.AlreadySold) {
+                        Mycontroller.SetMessageToUser6("SOLD ALREADY!", true);
+                    }
                 default:
             }
 
@@ -377,6 +394,19 @@ class Client {
         Mycontroller.SetItem5(SetItem5);
         String SetItem6 = AuctionItemClientSide.get(5).ItemName;
         Mycontroller.SetItem6(SetItem6);
+
+        double BuyItnow1 = AuctionItemClientSide.get(0).SetPrice;
+        Mycontroller.setBuyItnow1(BuyItnow1);
+        double BuyItnow2 = AuctionItemClientSide.get(1).SetPrice;
+        Mycontroller.setBuyItnow2(BuyItnow2);
+        double BuyItnow3 = AuctionItemClientSide.get(2).SetPrice;
+        Mycontroller.setBuyItnow3(BuyItnow3);
+        double BuyItnow4 = AuctionItemClientSide.get(3).SetPrice;
+        Mycontroller.setBuyItnow4(BuyItnow4);
+        double BuyItnow5 = AuctionItemClientSide.get(4).SetPrice;
+        Mycontroller.setBuyItnow5(BuyItnow5);
+        double BuyItnow6 = AuctionItemClientSide.get(5).SetPrice;
+        Mycontroller.setBuyItnow6(BuyItnow6);
     }
     ///////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////
