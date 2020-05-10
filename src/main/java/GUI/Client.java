@@ -1,11 +1,11 @@
 package GUI;
 
+import GUI.AuctionItem;
+import GUI.controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sun.javafx.image.IntPixelGetter;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -36,6 +36,7 @@ class Client {
         commandPasedToConsole = "KICKOFF";
         this.setUpNetworking();
         Client.Mycontroller = Mycontroller;
+        System.out.println(USERID);
     }
 
 
@@ -81,7 +82,7 @@ class Client {
                     Scanner scanner = new Scanner(System.in);
                     String input = scanner.nextLine();
                     if (!input.equals("NoCommand")) {
-                       Message MessageSpecificToTheCommand = CreateMessageBasedOnCommand(input);
+                        Message MessageSpecificToTheCommand = CreateMessageBasedOnCommand(input);
                         GsonBuilder builder = new GsonBuilder();
                         Gson gson = builder.create();
                         sendToServer(gson.toJson(MessageSpecificToTheCommand));
@@ -123,22 +124,22 @@ class Client {
 
         if (OG_MessageFromServer.command.equals("BIDFROMUSER")) {
             double newPrice = OG_MessageFromServer.BidPrice;
-          int USERID_of_Person_Who_Bid =  OG_MessageFromServer.USERID;
-          AuctionItem ItemThatWasBidOn = OG_MessageFromServer.ListofAucitonItems.get(OG_MessageFromServer.AuctionID);
-          int ItemThatWasBidOn_AuctionID = OG_MessageFromServer.AuctionID;
+            AuctionItem ItemThatWasBidOn = OG_MessageFromServer.ListofAucitonItems.get(OG_MessageFromServer.AuctionID);
+            int USERID_of_Person_Who_Bid =    ItemThatWasBidOn.WinnerID;
+            int ItemThatWasBidOn_AuctionID = OG_MessageFromServer.AuctionID;
 
             switch(ItemThatWasBidOn_AuctionID) {
                 case 0:
                     Mycontroller.SetMessageToUser1("No Message",  false);
                     if(OG_MessageFromServer.MakeChange ) {
-                    Mycontroller.Setcurrent_bid_1(newPrice);
-                        if (ItemThatWasBidOn.Sold ) {//update UI for the SOLD category
-                        String terminationMessage = "SOLD";
-                        Mycontroller.SetSold1(terminationMessage);
-                        Mycontroller.SetWinner1(Integer.toString(USERID_of_Person_Who_Bid));
                         Mycontroller.Setcurrent_bid_1(newPrice);
-                    }
+                        if (ItemThatWasBidOn.Sold ) {//update UI for the SOLD category
+                            String terminationMessage = "SOLD";
+                            Mycontroller.SetSold1(terminationMessage);
+                            Mycontroller.SetWinner1(Integer.toString(USERID_of_Person_Who_Bid));
+                            Mycontroller.Setcurrent_bid_1(newPrice);
                         }
+                    }
                     if(OG_MessageFromServer.tooLow ){
                         //Warning that MinPrice is Too low
                         Mycontroller.SetMessageToUser1("REJECTED, BID TO LOW",  true);
@@ -411,12 +412,14 @@ class Client {
 //////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 
-  static Message MessageGoingOutCurrently;//The sole message being send out. Each Client is only sending one message at a time anyways
+    static Message MessageGoingOutCurrently;//The sole message being send out. Each Client is only sending one message at a time anyways
     //so Static reference is of no worries.
 //Handler for controller class for A Bid Button Being hit.
     public static void BidButtonHit (int ButtonNumber, String BidPrice_string)  {
         double BidPrice=0.0;
         if(BidPrice_string.equals("")){  return; }
+
+       //Here could handle case where letters are Inputed but Not really necessary
 
         if (isInteger(BidPrice_string)) {
             Integer IntBidPrice = Integer.parseInt(BidPrice_string);
