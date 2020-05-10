@@ -2,141 +2,235 @@ package GUI;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
+import com.sun.javafx.image.IntPixelGetter;
 
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Queue;
 import java.util.Scanner;
 
-class Client{
-    static int USERID=0;
-  private static String host = "127.0.0.1";
-  private BufferedReader fromServer;
-  protected   PrintWriter toServer;
-  private Scanner consoleInput = new Scanner((System.in));
+class Client {
 
-Client () throws Exception {
-    USERID++;
-    this.setUpNetworking();
-}
+    static int USERID = 0;
+    private static String host = "127.0.0.1";
+    private BufferedReader fromServer;
+    protected PrintWriter toServer;
+    private static controller Mycontroller;
 
+    //private Scanner consoleInput = new Scanner((System.in));
 
-        protected void  sendToServer (String string){
-            System.out.println("Sending to server: " + string);
-            toServer.println(string);
-            toServer.flush();
-        }
+    static String commandPasedToConsole = "NoCommand";
+    InputStream stdin = System.in;
 
-        void setUpNetworking () throws Exception {
-            @SuppressWarnings("resource")
-            Socket socket = new Socket(host, 4242);
-            System.out.println("Connecting to... " + socket);
-            fromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            toServer = new PrintWriter(socket.getOutputStream());
+    // public BufferedReader LikeConsoleBuffer; //added by me
+    //LikeConsoleBuffer = new BufferedReader(new InputStreamReader(LikeConsole));
+    //private Scanner consoleInput = new Scanner((LikeConsole));
 
-            Thread readerThread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    String input;
-                    try {
-                        while ((input = fromServer.readLine()) != null) {
-                            System.out.println("From server: " + input);
-                            processRequest(input);
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-
-            Thread writerThread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    while (true) {
-                     //   String input = consoleInput.nextLine();
+    Client() throws Exception {
+        USERID++;
+        this.setUpNetworking();
+    }
+    Client(controller Mycontroller) throws Exception {
+        USERID++;
+        commandPasedToConsole = "KICKOFF";
+        this.setUpNetworking();
+        Client.Mycontroller = Mycontroller;
+    }
 
 
-                    }
-                }
-            });
-            readerThread.start();
-            writerThread.start();
-        }
-        /////////////////////////////////////////////
-        //BELOW IS ALL THE METHODS TO READ STUFF FROM SERVER AND HOW TO REACT TO IT.
-        protected void processRequest (String input) throws IOException {
-            String output = "DefaultMessageIfNoCaseHit";
-            Gson gson = new Gson();
-            Message message = gson.fromJson(input, Message.class);//Converting Back into a Message
-            ParseInputGivenByServer(message.command, message);//This will go to execute task and create response if Needed Use the Output to write back to server
-        }
-
-        public void ParseInputGivenByServer (String Commmand, Message OG_MessageFromServer) throws IOException {
 
 
-        if(OG_MessageFromServer.command.equals("BIDFROMUSER") || OG_MessageFromServer.MakeChange){
-        String newPrice =  Integer.toString(OG_MessageFromServer.number);
-        //HERE PLATFORM RUN UI CALL
-            }
-
-            if (Commmand.equals("Initialization")) {
-                InitializeMethod(OG_MessageFromServer);
-                CreateResponsePackge("Initialization");
-            }
-        }
-
-
-    public static ArrayList<AuctionItem> AuctionItemClientSide;
-
-    ////METHODS THAT CHANGE THE UI based on info given by the SERVER
-        public void InitializeMethod (Message OG_MessageFromServer) {
-            AuctionItemClientSide = OG_MessageFromServer.ListofAucitonItems;
-            String ItemDesciption = AuctionItemClientSide.get(0).ItemDescription;
-
-        }
-
-    ///////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////
-
-        public static Message CreateResponsePackge (String Commmand){
-            if (Commmand.equals("KICKOFF")) { //Method to Write back to
-                String words = "KICKOFF";
-                Message InitialMessageToGetGUI = new Message(words);
-                return InitialMessageToGetGUI;
-            }
-
-            if (Commmand.equals("Initialization")) {
-                String words = "Initialization_WAS_RECEIVED_AND_SHOULD_BE_COMPLETE";
-                Message ConfirmationMessageofGUIKickoff = new Message(words);
-                return ConfirmationMessageofGUIKickoff;
-            }
-
-            Message Default = new Message("NoDATA");
-            return Default;
-        }
-
-
-    public void  BidButtonHit(int ButtonNumber) throws IOException {
-            Message BIDFROMUSER = new Message( "BIDFROMUSER", ButtonNumber, USERID, AuctionItemClientSide );
-            GsonBuilder builder = new GsonBuilder();
-            Gson gson = builder.create();
-            sendToServer(gson.toJson(BIDFROMUSER));
-                    }
-
-
-   public static void main (String[]args) throws Exception {
+    protected void sendToServer(String string) {
+        System.out.println("Sending to server: " + string);
+        toServer.println(string);
+        toServer.flush();
+        commandPasedToConsole = "NoCommand";//reset command after each message as to not keep sending message
 
     }
 
-    ///NOT SURE WE NEED THIS
-    FileOutputStream out = new FileOutputStream("test.txt");
-    ObjectOutputStream oout = new ObjectOutputStream(out);
-    ObjectInputStream ois = new ObjectInputStream(new FileInputStream("test.txt"));
-    public void setObj(Message m) throws IOException {
-        oout.writeObject(m);
+    void setUpNetworking() throws Exception {
+        @SuppressWarnings("resource")
+        Socket socket = new Socket(host, 4242);
+        System.out.println("Connecting to... " + socket);
+        fromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        toServer = new PrintWriter(socket.getOutputStream());
+
+
+        Thread readerThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String input;
+                try {
+                    while ((input = fromServer.readLine()) != null) {
+                        System.out.println("From server: " + input);
+                        processRequest(input);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        Thread writerThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                while (true) {
+                    System.setIn(new ByteArrayInputStream(commandPasedToConsole.getBytes()));
+                    Scanner scanner = new Scanner(System.in);
+                    String input = scanner.nextLine();
+                    if (!input.equals("NoCommand")) {
+                        Message MessageSpecificToTheCommand = CreateMessageBasedOnCommand(input);
+                        GsonBuilder builder = new GsonBuilder();
+                        Gson gson = builder.create();
+                        sendToServer(gson.toJson(MessageSpecificToTheCommand));
+                    }
+                }
+            }
+        });
+        readerThread.start();
+        writerThread.start();
+    }
+
+
+
+    /////////////////////////////////////////////
+    //BELOW IS ALL THE METHODS TO READ STUFF FROM SERVER AND HOW TO REACT TO IT.
+    protected void processRequest(String input) throws IOException {
+        //Helper Method to standardize GSON to Message Class before doing any "Work" for the class.
+        String output = "DefaultMessageIfNoCaseHit";
+        Gson gson = new Gson();
+        Message message = gson.fromJson(input, Message.class);//Converting Back into a Message
+        ParseInputGivenByServer(message.command, message);//This will go to execute task and create response if Needed Use the Output to write back to server
+    }
+
+    public void ParseInputGivenByServer(String Commmand, Message OG_MessageFromServer) throws IOException {
+
+        if (OG_MessageFromServer.command.equals("BIDFROMUSER")) {
+            //Parse The Auction list for the item based on the Unique Number given back. Now update UI based on options
+            //update SOLD UNSOLD (sold parameter of Auction Item)
+            //update VALID INVALID BID (USERID, makeChange field from Message class)
+            //update CURRENT BID ( CurrentBid because should have been updated on server side already from AuctionItem)
+            //update WINNER ID (sold status and Winner id filed from AuctionItem class)
+
+
+            //UI calls will work according to what is necessary based on Mesasge and updated fields in AuctionItem Object in the ArrayList
+        }
+
+        if (Commmand.equals("Initialization")) {
+            InitializeMethod(OG_MessageFromServer);
+            // CreateResponsePackge("Initialization");
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    //BELOW ARE various functions that may do calculations or update local values.
+    // It also contain initiliazation of entire bid sites UI elements. Some functions may require some more "Leg work"
+    //before giving a response or modifying a UI elements.
+    //One of those functions could include checking to see if the Bidder who go rejected was me, and thus a UI "Rejection" is in order.
+    ///////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    public static ArrayList<AuctionItem> AuctionItemClientSide;
+
+    ////METHODS THAT CHANGE THE UI based on info given by the SERVER
+    public void InitializeMethod(Message OG_MessageFromServer) throws IOException {
+        //Method that creates local side copy of all items for sale. //Initialize UI
+        AuctionItemClientSide = OG_MessageFromServer.ListofAucitonItems;
+        String ItemDesciption = AuctionItemClientSide.get(0).ItemDescription;
+        Mycontroller.SetDescription1(ItemDesciption);
+        String ItemDesciption1 = AuctionItemClientSide.get(1).ItemDescription;
+        Mycontroller.SetDescription2(ItemDesciption1);
+        String ItemDesciption2 = AuctionItemClientSide.get(2).ItemDescription;
+        Mycontroller.SetDescription3(ItemDesciption2);
+        String ItemDesciption3 = AuctionItemClientSide.get(3).ItemDescription;
+        Mycontroller.SetDescription4(ItemDesciption3);
+        String ItemDesciption4 = AuctionItemClientSide.get(4).ItemDescription;
+        Mycontroller.SetDescription5(ItemDesciption4);
+        String ItemDesciption5 = AuctionItemClientSide.get(5).ItemDescription;
+        Mycontroller.SetDescription6(ItemDesciption5);
+
+        String SetItem1 = AuctionItemClientSide.get(0).ItemName;
+        Mycontroller.SetItem1(SetItem1);
+        String SetItem2 = AuctionItemClientSide.get(1).ItemName;
+        Mycontroller.SetItem2(SetItem2);
+        String SetItem3 = AuctionItemClientSide.get(2).ItemName;
+        Mycontroller.SetItem3(SetItem3);
+        String SetItem4 = AuctionItemClientSide.get(3).ItemName;
+        Mycontroller.SetItem4(SetItem4);
+        String SetItem5 = AuctionItemClientSide.get(4).ItemName;
+        Mycontroller.SetItem5(SetItem5);
+        String SetItem6 = AuctionItemClientSide.get(5).ItemName;
+        Mycontroller.SetItem6(SetItem6);
+
+    }
+    ///////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////
+
+
+    public  static Message CreateMessageBasedOnCommand(String Commmand) {
+        if (Commmand.equals("KICKOFF")) { //Method to Write back to
+            String words = "KICKOFF";
+            Message InitialMessageToGetGUI = new Message(words);
+            MessageGoingOutCurrently =InitialMessageToGetGUI;
+            return MessageGoingOutCurrently;
+        }
+
+        if (Commmand.equals("Initialization")) {
+            String words = "Initialization_WAS_RECEIVED_AND_SHOULD_BE_COMPLETE";
+            Message ConfirmationMessageofGUIKickoff = new Message(words);
+            MessageGoingOutCurrently = ConfirmationMessageofGUIKickoff;
+            return MessageGoingOutCurrently;
+        }
+
+        if (Commmand.equals("BIDFROMUSER")) {
+            return MessageGoingOutCurrently;//Because already built earlier in our function dealing wit Button Clicks
+        }
+        Message Default_Message = new Message("NO_MESSAGE_WAS_CREATED");
+        return Default_Message;
+    }
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+
+    static Message MessageGoingOutCurrently;//The sole message being send out. Each Client is only sending one message at a time anyways
+    //so Static reference is of no worries.
+//Handler for controller class for A Bid Button Being hit.
+    public static void  BidButtonHit (int ButtonNumber, String BidPrice_string)  {
+        double BidPrice=0.0;
+        if(BidPrice_string.equals("")){  return; }
+
+        if (isInteger(BidPrice_string)) {
+            Integer IntBidPrice = Integer.parseInt(BidPrice_string);
+            BidPrice =  IntBidPrice.doubleValue();
+        } else if (isDouble(BidPrice_string)){
+            BidPrice = Double.parseDouble(BidPrice_string);
+        }
+        String Command = "BIDFROMUSE";
+        int UniqueID = AuctionItemClientSide.get(ButtonNumber-1).UniqueID;//get Auction ID to know what object
+        MessageGoingOutCurrently = new Message(Command, UniqueID, USERID, AuctionItemClientSide, BidPrice);
+        commandPasedToConsole= "BIDFROMUSER";
+    }
+    public static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isDouble(String s) {
+        try {
+            Double.parseDouble(s);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+    public static void main(String[] args) throws Exception {
     }
 
 }

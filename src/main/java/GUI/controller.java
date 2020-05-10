@@ -28,24 +28,85 @@ public class controller {
     @FXML
     public PasswordField passwordTextBox;
     @FXML
-    public Label Description_1;
-    @FXML
-    public Text Text_Item1;
+    public Text Description1;
+    public Text Description2;
+    public Text Description3;
+    public Text Description4;
+    public Text Description5;
+    public Text Description6;
     @FXML
     public TextField TimeLeft1;
+    @FXML
+    public Text Text_Item1;
+    public Text Text_Item2;
+    public Text Text_Item5;
+    public Text Text_Item4;
+    public Text Text_Item3;
+    public Text Text_Item6;
+
+    public TextField yourbid_1;
+    public Button Bid_button_1;
 
     @FXML
     public void BidButton1Clicked(ActionEvent actionEvent) throws Exception {
 
+        Client.BidButtonHit(1 , yourbid_1.getText());
     }
     @FXML
     public void ClientBid1(ActionEvent actionEvent) {
     }
 
     @FXML
-    public void SetDescription1(String a) throws IOException {
-         Text_Item1.setText("test");
-     //  Description_1.setText("test1");
+    public void SetDescription1(String D)  {
+        Description1.setText(D);
+    }
+    @FXML
+    public void SetDescription2(String D) {
+        Description2.setText(D);
+    }
+    @FXML
+    public void SetDescription3(String  D) {
+        Description3.setText(D);
+    }
+    @FXML
+    public void SetDescription4(String  D) {
+        Description4.setText(D);
+    }
+    @FXML
+    public void SetDescription5(String  D) {
+        Description5.setText(D);
+    }
+    @FXML
+    public void SetDescription6(String  D) {
+        Description6.setText(D);
+    }
+    @FXML
+    public void SetItem1(String itemName) {
+        Text_Item1.setText(itemName);
+    }
+    @FXML
+    public void SetItem2(String itemName) {
+        Text_Item2.setText(itemName);
+
+    }
+    @FXML
+    public void SetItem3(String itemName) {
+        Text_Item3.setText(itemName);
+
+    }
+    @FXML
+    public void SetItem4(String itemName) {
+        Text_Item4.setText(itemName);
+
+    }
+    @FXML
+    public void SetItem5(String itemName) {
+        Text_Item5.setText(itemName);
+
+    }
+    @FXML
+    public void SetItem6(String itemName) {
+        Text_Item6.setText(itemName);
     }
 
     //Change Scene Method
@@ -73,6 +134,7 @@ public class controller {
         if (usernameTextBox.getText() == null || usernameTextBox.getText().trim().isEmpty()) {
             Parent view2 = FXMLLoader.load(getClass().getResource("/RoughDraftFinalProject.fxml"));
             Scene scene2 = new Scene(view2);
+
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             window.setScene(scene2);
             window.show();

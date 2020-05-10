@@ -13,6 +13,34 @@ public class Message implements Serializable {
   boolean MakeChange;
   int AuctionID;
   AuctionItem A;
+  double BidPrice;
+
+  public Message(String type ) {
+    this.command = type;
+    this.input = null;
+    this.USERID = 0;
+    this.input = "";
+    this.number = 0;
+    this.Item = null;
+    this.MakeChange = false;
+    this.ListofAucitonItems =null;
+    System.out.println("Client side message");
+  }
+
+  public Message(String type, int AuctionID ,int USERID , ArrayList<AuctionItem> listofAucitonItems, double BidPrice) {
+    this.AuctionID=AuctionID;
+    this.command = type;
+    this.input = null;
+    this.USERID = USERID;
+    this.input = "";
+    this.number = 0;
+    this.Item = null;
+    this.MakeChange = false;
+    this.BidPrice = BidPrice;
+    this.ListofAucitonItems=listofAucitonItems;
+    System.out.println("Client side message");}
+
+
   protected Message() {}
 
   protected Message(String type , int USERID , AuctionItem Item) {
@@ -24,6 +52,7 @@ public class Message implements Serializable {
     this.ListofAucitonItems =null;
     System.out.println("Client side message");
   }
+
   protected Message(String type,  int USERID , AuctionItem Item, boolean MakeChange) {
     this.USERID = USERID;
     this.command = type;
@@ -50,18 +79,6 @@ public class Message implements Serializable {
   }
 
 
-  public Message(String type ) {
-    this.command = type;
-    this.input = null;
-    this.USERID = 0;
-    this.input = "";
-    this.number = 0;
-    this.Item = null;
-    this.MakeChange = false;
-    this.ListofAucitonItems =null;
-    System.out.println("Client side message");
-  }
-
   public Message(String type, ArrayList<AuctionItem> listofAucitonItems) {
     this.command = type;
     this.input = null;
@@ -71,18 +88,6 @@ public class Message implements Serializable {
     this.Item = null;
     this.MakeChange = false;
     this.ListofAucitonItems =listofAucitonItems;
-    System.out.println("Client side message");}
-
-  public Message(String type, int AuctionID ,int USERID , ArrayList<AuctionItem> listofAucitonItems) {
-    this.AuctionID=AuctionID;
-    this.command = type;
-    this.input = null;
-    this.USERID = USERID;
-    this.input = "";
-    this.number = 0;
-    this.Item = null;
-    this.MakeChange = false;
-    this.ListofAucitonItems=listofAucitonItems;
     System.out.println("Client side message");}
 
 

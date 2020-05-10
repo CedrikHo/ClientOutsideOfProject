@@ -3,27 +3,30 @@ package GUI;
 import java.io.Serializable;
 
 public class AuctionItem implements Serializable {
-    static int ItemID =0;
+    static int ItemID = 0;
     //Fields of all the things an Auction Item may have
-    int UniqueID;
+    int UniqueID; //ID of the Auction Item. Should be the same as index in Array of Auction created on initialization
     String ItemName;
-    int MinPrice;
-    int CurrentBid;
+    double SetPrice;
+    double MinPrice;
+    double CurrentBid;
     boolean Sold;
-    double timeLeft;
-    boolean OutofTime;
-    String LastBidder;
-    String WinnerID;//who has won the Item
+    double ClosingPrice;
+    int WinnerID;//who has won the Item
     String ItemDescription;
 
+
     public AuctionItem(){
-        UniqueID= ItemID++; //When creating Auction Item I never want to confuse by name so just give it an ID.
+        UniqueID= ItemID++;
+        SetPrice =-1;
+        MinPrice=-1;
         ItemName =null;
         CurrentBid =0;
-        LastBidder = null;
+        WinnerID = -1;
         Sold = false;
-        WinnerID = null;
-        OutofTime = false;
+        ClosingPrice=-1;
+        SetPrice = 0;
+        ItemDescription =null;
     }
 
 

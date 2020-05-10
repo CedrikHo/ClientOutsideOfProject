@@ -9,13 +9,15 @@ import javafx.stage.Stage;
 
 
 public class ClientApp  extends Application  {
+    public Viewer View;
+    public static int ClientNumber;
     @Override
         public void start(Stage primaryStage) throws Exception {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/LoginPage.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/RoughDraftFinalProject.fxml"));
                 Parent root = loader.load();
-                Client C =  new Client();
-                Viewer View = new Viewer( loader.getController(),C ); //Tie the controller and the Client Together
+                Client C =  new Client(loader.getController());
+                View = new Viewer( loader.getController(),C ); //Tie the controller and the Client Together
                 primaryStage.setTitle("BID_WAR");
                 primaryStage.setScene(new Scene(root, 1200, 600));
                 primaryStage.show();
@@ -23,6 +25,8 @@ public class ClientApp  extends Application  {
                 e.printStackTrace();
             }
         }
+
+
 
     public static void main(String[] args) {
         launch(args); //start GUI

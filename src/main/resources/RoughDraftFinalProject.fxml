@@ -2,10 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,8 +11,10 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <ScrollPane fx:id="Main_Scroller_Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pannable="true" prefHeight="607.0" prefWidth="834.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller">
@@ -45,7 +45,7 @@
                                  <children>
                                     <HBox prefHeight="59.0" prefWidth="618.0">
                                        <children>
-                                          <Button fx:id="Bid_button_3" graphicTextGap="2.0" mnemonicParsing="false" onAction="#BidButton3Clicked" prefHeight="42.0" prefWidth="65.0" style="-fx-background-color: orange;" text="Bid" HBox.hgrow="ALWAYS" />
+                                          <Button fx:id="Bid_button_3" graphicTextGap="2.0" mnemonicParsing="false" onAction="#BidButton3Clicked" prefHeight="42.0" prefWidth="89.0" style="-fx-background-color: orange;" text="Bid" HBox.hgrow="ALWAYS" />
                                           <TextField fx:id="yourbid_3" onAction="#ClientBid3" prefHeight="35.0" prefWidth="0.0" promptText="your Bid" HBox.hgrow="ALWAYS">
                                              <effect>
                                                 <Bloom threshold="1.0" />
@@ -72,14 +72,19 @@
                               </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                  <children>
-                                    <TextArea fx:id="Description_3" layoutX="-5.0" layoutY="-2.0" prefHeight="56.0" prefWidth="623.0" text="Description of Item&#10;" />
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="42.0" prefWidth="509.0">
+                                       <children>
+                                          <Text fx:id="Description3" layoutX="20.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="215.02563095092773" />
+                                       </children>
+                                    </AnchorPane>
                                  </children>
                               </AnchorPane>
                           </items>
                         </SplitPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Text layoutX="14.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                              <Text fx:id="Text_Item3" layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="92.3590087890625" />
+                              <Text layoutX="14.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="90.5811767578125" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -92,7 +97,7 @@
                                  <children>
                                     <HBox prefHeight="59.0" prefWidth="618.0">
                                        <children>
-                                          <Button fx:id="Bid_button_4" graphicTextGap="2.0" mnemonicParsing="false" onAction="#BidButton4Clicked" prefHeight="42.0" prefWidth="65.0" style="-fx-background-color: orange;" text="Bid" HBox.hgrow="ALWAYS" />
+                                          <Button fx:id="Bid_button_4" graphicTextGap="2.0" mnemonicParsing="false" onAction="#BidButton4Clicked" prefHeight="42.0" prefWidth="87.0" style="-fx-background-color: orange;" text="Bid" HBox.hgrow="ALWAYS" />
                                           <TextField fx:id="yourbid_4" onAction="#ClientBid4" prefHeight="35.0" prefWidth="0.0" promptText="your Bid" HBox.hgrow="ALWAYS">
                                              <effect>
                                                 <Bloom threshold="1.0" />
@@ -119,14 +124,19 @@
                               </AnchorPane>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                  <children>
-                                    <TextArea fx:id="Description_4" layoutX="-5.0" layoutY="-2.0" prefHeight="56.0" prefWidth="623.0" text="Description of Item&#10;" />
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="40.0" prefWidth="555.0">
+                                       <children>
+                                          <Text fx:id="Description4" layoutX="20.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="385.69231033325195" />
+                                       </children>
+                                    </AnchorPane>
                                  </children>
                               </AnchorPane>
                            </items>
                         </SplitPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Text layoutX="14.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                              <Text fx:id="Text_Item4" layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="136.803466796875" />
+                              <Text layoutX="14.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="138.58111572265625" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -139,7 +149,7 @@
                                  <children>
                                     <HBox prefHeight="59.0" prefWidth="618.0">
                                        <children>
-                                          <Button fx:id="Bid_button_5" graphicTextGap="2.0" mnemonicParsing="false" onAction="#BidButton5Clicked" prefHeight="42.0" prefWidth="65.0" style="-fx-background-color: orange;" text="Bid" HBox.hgrow="ALWAYS" />
+                                          <Button fx:id="Bid_button_5" graphicTextGap="2.0" mnemonicParsing="false" onAction="#BidButton5Clicked" prefHeight="42.0" prefWidth="85.0" style="-fx-background-color: orange;" text="Bid" HBox.hgrow="ALWAYS" />
                                           <TextField fx:id="yourbid5" onAction="#ClientBid5" prefHeight="35.0" prefWidth="0.0" promptText="your Bid" HBox.hgrow="ALWAYS">
                                              <effect>
                                                 <Bloom threshold="1.0" />
@@ -165,27 +175,28 @@
                                  </children></AnchorPane>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                  <children>
-                                    <TextArea fx:id="Description_5" layoutX="-5.0" layoutY="-2.0" prefHeight="56.0" prefWidth="623.0" text="Description of Item&#10;" />
+                                    <Text fx:id="Description5" layoutX="20.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="191.02559280395508" />
                                  </children>
                               </AnchorPane>
                            </items>
                         </SplitPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Text layoutX="14.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                              <Text fx:id="Text_Item5" layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="83.47003173828125" />
+                              <Text layoutX="14.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="81.69232177734375" />
                            </children>
                         </AnchorPane>
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
-                        <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="114.0" prefWidth="622.0">
+                        <SplitPane dividerPositions="0.5, 0.5" orientation="VERTICAL" prefHeight="114.0" prefWidth="622.0">
                            <items>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                  <children>
                                     <HBox prefHeight="59.0" prefWidth="618.0">
                                        <children>
-                                          <Button fx:id="Bid_button_2" graphicTextGap="2.0" mnemonicParsing="false" onAction="#BidButton2Clicked" prefHeight="42.0" prefWidth="65.0" style="-fx-background-color: orange;" text="Bid" HBox.hgrow="ALWAYS" />
+                                          <Button fx:id="Bid_button_2" graphicTextGap="2.0" mnemonicParsing="false" onAction="#BidButton2Clicked" prefHeight="42.0" prefWidth="93.0" style="-fx-background-color: orange;" text="Bid" HBox.hgrow="ALWAYS" />
                                           <TextField fx:id="yourbid_2" onAction="#ClientBid2" prefHeight="35.0" prefWidth="0.0" promptText="your Bid" HBox.hgrow="ALWAYS">
                                              <effect>
                                                 <Bloom threshold="1.0" />
@@ -210,16 +221,18 @@
                                     </HBox>
                                  </children>
                               </AnchorPane>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                  <children>
-                                    <TextArea fx:id="Description_2" layoutX="-5.0" layoutY="-2.0" prefHeight="56.0" prefWidth="623.0" text="Description of Item&#10;" />
+                                    <Text fx:id="Description2" layoutX="20.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="414.1367378234863" />
                                  </children>
                               </AnchorPane>
                            </items>
                         </SplitPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Text layoutX="14.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                              <Text fx:id="Text_Item2" layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="95.02557373046875" />
+                              <Text layoutX="16.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="99.4700927734375" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -232,41 +245,44 @@
                                  <children>
                                     <HBox prefHeight="59.0" prefWidth="618.0">
                                        <children>
-                                          <Button fx:id="Bid_button_1" graphicTextGap="2.0" mnemonicParsing="false" onAction="#BidButton1Clicked" prefHeight="42.0" prefWidth="65.0" style="-fx-background-color: orange;" text="Bid" HBox.hgrow="ALWAYS" />
-                                          <TextField fx:id="yourbid_1" onAction="#ClientBid1" prefHeight="35.0" prefWidth="0.0" promptText="your Bid" HBox.hgrow="ALWAYS">
+                                          <Button fx:id="Bid_button_1" graphicTextGap="2.0" mnemonicParsing="false" onAction="#BidButton1Clicked" prefHeight="42.0" prefWidth="131.0" style="-fx-background-color: orange;" text="Bid" HBox.hgrow="ALWAYS" />
+                                          <TextField fx:id="yourbid_1" onAction="#ClientBid1" prefHeight="35.0" prefWidth="172.0" promptText="your Bid" HBox.hgrow="ALWAYS">
                                              <effect>
                                                 <Bloom threshold="1.0" />
                                              </effect>
                                           </TextField>
-                                          <TextField fx:id="currentBid_1" prefHeight="35.0" prefWidth="108.0" promptText="Current_Bid">
-                                             <effect>
-                                                <Bloom threshold="1.0" />
-                                             </effect>
-                                          </TextField>
-                                          <TextField fx:id="Min_price1" opacity="0.29" prefHeight="41.0" prefWidth="0.0" promptText="Min Bid" text="Min price" HBox.hgrow="ALWAYS">
-                                             <effect>
-                                                <Bloom threshold="1.0" />
-                                             </effect>
-                                          </TextField>
-                                          <TextField fx:id="TimeLeft1" opacity="0.29" prefHeight="41.0" prefWidth="142.0" promptText="Min Bid" text="Time Left">
-                                             <effect>
-                                                <Bloom threshold="1.0" />
-                                             </effect>
-                                          </TextField>
+                                          <Text smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text=" current bid" wrappingWidth="75.4700927734375">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Text>
+                                          <Region prefHeight="59.0" prefWidth="68.0" />
+                                          <Text smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Min Price" wrappingWidth="100.35911560058594">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                          <Region prefHeight="59.0" prefWidth="39.0" />
+                                          <Text smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSOLD" wrappingWidth="239.0255889892578">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Text>
                                        </children>
                                     </HBox>
                                  </children>
                               </AnchorPane>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                  <children>
-                                    <Label fx:id="Description_1" layoutX="14.0" layoutY="6.0" text="Description of Item" wrapText="true" />
+                                    <Text fx:id="Description1" layoutX="20.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="415.91447830200195" />
                                  </children>
                               </AnchorPane>
                            </items>
                         </SplitPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Text fx:id="Text_Item1" layoutX="14.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                              <Text fx:id="Text_Item1" layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="88.80340576171875" />
+                              <Text layoutX="14.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WinnerID:" wrappingWidth="101.247802734375" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -279,7 +295,7 @@
                                  <children>
                                     <HBox prefHeight="59.0" prefWidth="618.0">
                                        <children>
-                                          <Button fx:id="Bid_button_6" graphicTextGap="2.0" mnemonicParsing="false" onAction="#BidButton6Clicked" prefHeight="42.0" prefWidth="65.0" style="-fx-background-color: orange;" text="Bid" HBox.hgrow="ALWAYS" />
+                                          <Button fx:id="Bid_button_6" graphicTextGap="2.0" mnemonicParsing="false" onAction="#BidButton6Clicked" prefHeight="42.0" prefWidth="85.0" style="-fx-background-color: orange;" text="Bid" HBox.hgrow="ALWAYS" />
                                           <TextField fx:id="yourbid_6" onAction="#ClientBid6" prefHeight="35.0" prefWidth="0.0" promptText="your Bid" HBox.hgrow="ALWAYS">
                                              <effect>
                                                 <Bloom threshold="1.0" />
@@ -306,14 +322,15 @@
                               </AnchorPane>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                  <children>
-                                    <TextArea fx:id="Description_6" layoutX="-5.0" layoutY="-2.0" prefHeight="56.0" prefWidth="623.0" text="Description of Item&#10;" />
+                                    <Text fx:id="Description6" layoutX="20.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="450.58112716674805" />
                                  </children>
                               </AnchorPane>
                            </items>
                         </SplitPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Text layoutX="14.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                              <Text fx:id="Text_Item6" layoutX="14.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="110.13671875" />
+                              <Text layoutX="14.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="88.80340576171875" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -326,7 +343,7 @@
                <children>
                   <VBox fx:id="rightVbox" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Button fx:id="PurchaseHistoryButton" mnemonicParsing="false" onAction="#changeSceenToBidHistory" prefHeight="56.0" prefWidth="100.0" text="Bid History" />
+                        <VBox prefHeight="546.0" prefWidth="100.0" />
                      </children>
                   </VBox>
                </children>
