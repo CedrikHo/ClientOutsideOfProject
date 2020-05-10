@@ -19,24 +19,16 @@ public class controller {
 
     //Variables tied to FxId to use for action and events
     //LOGIN IN PAGE FXId's
-    @FXML
     public TextField usernameTextBox;
-    @FXML
     public Button Login_Button;
-    @FXML
     public Button GuestButton;
-    @FXML
     public PasswordField passwordTextBox;
-    @FXML
     public Text Description1;
     public Text Description2;
     public Text Description3;
     public Text Description4;
     public Text Description5;
     public Text Description6;
-    @FXML
-    public TextField TimeLeft1;
-    @FXML
     public Text Text_Item1;
     public Text Text_Item2;
     public Text Text_Item5;
@@ -47,28 +39,48 @@ public class controller {
     public TextField yourbid_1;
     public Button Bid_button_1;
     public Text current_bid_1;
-    public Text Sold_1;
+    public Text Sold1;
     public Text Winner1;
     public Text MinPrice1;
     public Text MessageToUser1;
+    public Button Bid_button_2;
+    public TextField yourbid_2;
+    public Text current_bid_2;
+    public Text MinPrice2;
+    public Text Sold2;
+    public Text MessageToUser2;
+    public Text Winner2;
+    public Button Bid_button_3;
+    public TextField yourbid_3;
+    public Text current_bid_3;
+    public Text MinPrice3;
+    public Text Sold3;
+    public Text MessageToUser3;
+    public Text Winner3;
+    public Button Bid_button_4;
+    public TextField yourbid_4;
+    public Text current_bid_4;
+    public Text MinPrice4;
+    public Text Sold4;
+    public Text MessageToUser4;
+    public Text Winner4;
+    public Button Bid_button_5;
+    public TextField yourbid_5;
+    public Text current_bid_5;
+    public Text MinPrice5;
+    public Text Sold5;
+    public Text MessageToUser5;
+    public Text Winner5;
+    public Button Bid_button_6;
+    public TextField yourbid_6;
+    public Text current_bid_6;
+    public Text MinPrice6;
+    public Text Sold6;
+    public Text MessageToUser6;
+    public Text Winner6;
 
-    public void SetMessageToUser1(String ErrorMessage , boolean sw ){
-        MessageToUser1.setText(ErrorMessage);
-        MessageToUser1.setVisible(sw);
-    }
-    public void  ClientBid1 (ActionEvent actionEvent) throws Exception {}
-    @FXML
-    public void BidButton1Clicked(ActionEvent actionEvent) throws Exception {
+    String winnertxt = "WinnerID: ";
 
-        Client.BidButtonHit(1 , yourbid_1.getText());
-    }
-    public void Setcurrent_bid_1(double newPrice){
-        current_bid_1.setText(Double.toString(newPrice));
-    }
-    public void SetSold1(String terminationMessage) {
-        Sold_1.setText(terminationMessage);
-    }
-     String winnertxt = "WinnerID: ";
     public void SetWinner1(String winnerID) {
         Winner1.setText(winnertxt + winnerID  );
     }
@@ -76,58 +88,219 @@ public class controller {
         MinPrice1.setText(Double.toString(minPrice));
     }
 
-    @FXML
     public void SetDescription1(String D)  {
         Description1.setText(D);
     }
-    @FXML
     public void SetDescription2(String D) {
         Description2.setText(D);
     }
-    @FXML
     public void SetDescription3(String  D) {
         Description3.setText(D);
     }
-    @FXML
     public void SetDescription4(String  D) {
         Description4.setText(D);
     }
-    @FXML
     public void SetDescription5(String  D) {
         Description5.setText(D);
     }
-    @FXML
     public void SetDescription6(String  D) {
         Description6.setText(D);
     }
-    @FXML
     public void SetItem1(String itemName) {
         Text_Item1.setText(itemName);
     }
-    @FXML
     public void SetItem2(String itemName) {
         Text_Item2.setText(itemName);
 
     }
-    @FXML
     public void SetItem3(String itemName) {
         Text_Item3.setText(itemName);
 
     }
-    @FXML
     public void SetItem4(String itemName) {
         Text_Item4.setText(itemName);
 
     }
-    @FXML
     public void SetItem5(String itemName) {
         Text_Item5.setText(itemName);
 
     }
-    @FXML
     public void SetItem6(String itemName) {
         Text_Item6.setText(itemName);
     }
+
+    /////////////////////////////////ITEM 1/////////////////////////
+
+    public void SetMessageToUser1(String ErrorMessage , boolean sw ){
+        MessageToUser1.setText(ErrorMessage);
+        MessageToUser1.setVisible(sw);
+    }
+    public void  ClientBid1 (ActionEvent actionEvent) throws Exception {}
+    @FXML
+    public void BidButtonClicked1(ActionEvent actionEvent) throws Exception {
+
+        Client.BidButtonHit(1 , yourbid_1.getText());
+    }
+    public void Setcurrent_bid_1(double newPrice){
+        current_bid_1.setText(Double.toString(newPrice));
+    }
+    public void SetSold1(String terminationMessage) {
+        Sold1.setText(terminationMessage);
+    }
+
+
+    /////////////////////////////////ITEM 2/////////////////////////
+    public void BidButtonClicked2(ActionEvent actionEvent) throws Exception {
+
+        Client.BidButtonHit(2 , yourbid_1.getText());
+    }
+    public void SetMessageToUser2(String ErrorMessage , boolean sw ){
+        MessageToUser2.setText(ErrorMessage);
+        MessageToUser2.setVisible(sw);
+    }
+
+    public void Setcurrent_bid_2(double newPrice){
+        current_bid_2.setText(Double.toString(newPrice));
+    }
+    public void SetSold2(String terminationMessage) {
+        Sold2.setText(terminationMessage);
+    }
+    public void SetWinner2(String winnerID) {
+        Winner2.setText(winnertxt + winnerID  );
+    }
+    public void SetMinPrice_2(double minPrice) {
+        MinPrice2.setText(Double.toString(minPrice));
+    }
+
+
+
+
+    /////////////////////////////////ITEM 3/////////////////////////
+
+    public void BidButtonClicked3(ActionEvent actionEvent) throws Exception {
+
+        Client.BidButtonHit(3 , yourbid_1.getText());
+    }
+    public void SetMessageToUser3(String ErrorMessage , boolean sw ){
+        MessageToUser3.setText(ErrorMessage);
+        MessageToUser3.setVisible(sw);
+    }
+
+    public void Setcurrent_bid_3(double newPrice){
+        current_bid_3.setText(Double.toString(newPrice));
+    }
+    public void SetSold3(String terminationMessage) {
+        Sold3.setText(terminationMessage);
+    }
+    public void SetWinner3(String winnerID) {
+        Winner3.setText(winnertxt + winnerID  );
+    }
+    public void SetMinPrice_3(double minPrice) {
+        MinPrice3.setText(Double.toString(minPrice));
+    }
+
+/////////////////////////////ITEM 4///////////////////////////////
+
+    public void BidButtonClicked4(ActionEvent actionEvent) throws Exception {
+
+        Client.BidButtonHit(4 , yourbid_1.getText());
+    }
+
+    public void SetMessageToUser4(String ErrorMessage , boolean sw ){
+        MessageToUser4.setText(ErrorMessage);
+        MessageToUser4.setVisible(sw);
+    }
+
+    public void Setcurrent_bid_4(double newPrice){
+        current_bid_4.setText(Double.toString(newPrice));
+    }
+    public void SetSold4(String terminationMessage) {
+        Sold1.setText(terminationMessage);
+    }
+    public void SetWinner4(String winnerID) {
+        Winner4.setText(winnertxt + winnerID  );
+    }
+    public void SetMinPrice_4(double minPrice) {
+        MinPrice4.setText(Double.toString(minPrice));
+    }
+
+/////////////////////ITEM 5//////////////////////////////
+
+    public void BidButtonClicked5(ActionEvent actionEvent) throws Exception {
+
+        Client.BidButtonHit(5, yourbid_1.getText());
+    }
+
+    public void SetMessageToUser5(String ErrorMessage , boolean sw ){
+        MessageToUser5.setText(ErrorMessage);
+        MessageToUser5.setVisible(sw);
+    }
+
+    public void Setcurrent_bid_5(double newPrice){
+        current_bid_5.setText(Double.toString(newPrice));
+    }
+    public void SetSold5(String terminationMessage) {
+        Sold5.setText(terminationMessage);
+    }
+    public void SetWinner5(String winnerID) {
+        Winner5.setText(winnertxt + winnerID  );
+    }
+    public void SetMinPrice_5(double minPrice) {
+        MinPrice5.setText(Double.toString(minPrice));
+    }
+
+
+///////////////////////ITEM 6 ///////////////////////
+
+public void BidButtonClicked6(ActionEvent actionEvent) throws Exception {
+
+    Client.BidButtonHit(6, yourbid_1.getText());
+}
+
+    public void SetMessageToUser6(String ErrorMessage , boolean sw ){
+        MessageToUser6.setText(ErrorMessage);
+        MessageToUser6.setVisible(sw);
+    }
+
+    public void Setcurrent_bid_6(double newPrice){
+        current_bid_6.setText(Double.toString(newPrice));
+    }
+    public void SetSold6(String terminationMessage) {
+        Sold6.setText(terminationMessage);
+    }
+    public void SetWinner6(String winnerID) {
+        Winner6.setText(winnertxt + winnerID  );
+    }
+    public void SetMinPrice_6(double minPrice) {
+        MinPrice6.setText(Double.toString(minPrice));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //Change Scene Method
     public void changeSceenToBidHistory(ActionEvent event) throws IOException {
@@ -144,6 +317,7 @@ public class controller {
         window.setScene(scene2);
         window.show();
     }
+
 
     /**
      * @param event // Login button changes to Main Page Scene
@@ -168,6 +342,7 @@ public class controller {
             passwordTextBox.clear();
         }
     }
+
 
     /**
      *
@@ -205,6 +380,10 @@ public class controller {
         //Need to reset everything in the program so that it is a new session. This is going to hard to do I think
     }
 
+
+
+
+/*
     public void ClientBid2(ActionEvent actionEvent) {
     }
 
@@ -236,8 +415,7 @@ public class controller {
 
     public void BidButton6Clicked(ActionEvent actionEvent) {
     }
-
-
+*/
 
 }
 

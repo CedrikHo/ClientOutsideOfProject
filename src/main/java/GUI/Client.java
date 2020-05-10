@@ -167,8 +167,13 @@ class Client {
 
     ////METHODS THAT CHANGE THE UI based on info given by the SERVER
     public void InitializeMethod(Message OG_MessageFromServer) throws IOException {
-        //Method that creates local side copy of all items for sale. //Initialize UI
+        //Method that creates local side copy of all items for sale.
+        //NOTE that is not Dynamically allocated, this is very much hard coded.
         AuctionItemClientSide = OG_MessageFromServer.ListofAucitonItems;
+
+        //////////////////////////////////////////////////////////////
+        ////INITIALIZATION OF FIRST AUCTION ITEM/////////////////////
+        /////////////////////////////////////////////////////////////
         String ItemDesciption = AuctionItemClientSide.get(0).ItemDescription;
         Mycontroller.SetDescription1(ItemDesciption);
 
@@ -184,17 +189,102 @@ class Client {
         Mycontroller.SetMinPrice_1(AuctionItemClientSide.get(0).MinPrice);
         Mycontroller.SetMessageToUser1("No Message",  false);
 
-        String ItemDesciption1 = AuctionItemClientSide.get(1).ItemDescription;
-        Mycontroller.SetDescription2(ItemDesciption1);
-        String ItemDesciption2 = AuctionItemClientSide.get(2).ItemDescription;
-        Mycontroller.SetDescription3(ItemDesciption2);
-        String ItemDesciption3 = AuctionItemClientSide.get(3).ItemDescription;
-        Mycontroller.SetDescription4(ItemDesciption3);
-        String ItemDesciption4 = AuctionItemClientSide.get(4).ItemDescription;
-        Mycontroller.SetDescription5(ItemDesciption4);
-        String ItemDesciption5 = AuctionItemClientSide.get(5).ItemDescription;
-        Mycontroller.SetDescription6(ItemDesciption5);
+        //////////////////////////////////////////////////////////////
+        ////INITIALIZATION OF SECOND AUCTION ITEM/////////////////////
+        /////////////////////////////////////////////////////////////
 
+        String ItemDesciption2 = AuctionItemClientSide.get(1).ItemDescription;
+        Mycontroller.SetDescription2(ItemDesciption2);
+
+        if (AuctionItemClientSide.get(1).Sold) {//update UI for the SOLD category
+            Mycontroller.SetSold2("SOLD");
+            Mycontroller.SetWinner2(Integer.toString(AuctionItemClientSide.get(1).WinnerID));
+        }
+
+        else{ Mycontroller.SetSold2("UNSOLD");
+            Mycontroller.SetWinner2("None");}
+
+        Mycontroller.Setcurrent_bid_2(AuctionItemClientSide.get(1).CurrentBid);
+        Mycontroller.SetMinPrice_2(AuctionItemClientSide.get(1).MinPrice);
+        Mycontroller.SetMessageToUser2("No Message",  false);
+
+        //////////////////////////////////////////////////////////////
+        ////INITIALIZATION OF THIRD AUCTION ITEM/////////////////////
+        /////////////////////////////////////////////////////////////
+
+        String ItemDesciption3 = AuctionItemClientSide.get(2).ItemDescription;
+        Mycontroller.SetDescription3(ItemDesciption3);
+        if (AuctionItemClientSide.get(2).Sold) {//update UI for the SOLD category
+            Mycontroller.SetSold3("SOLD");
+            Mycontroller.SetWinner3(Integer.toString(AuctionItemClientSide.get(2).WinnerID));
+        }
+
+        else{ Mycontroller.SetSold3("UNSOLD");
+            Mycontroller.SetWinner3("None");}
+
+        Mycontroller.Setcurrent_bid_3(AuctionItemClientSide.get(2).CurrentBid);
+        Mycontroller.SetMinPrice_3(AuctionItemClientSide.get(2).MinPrice);
+        Mycontroller.SetMessageToUser3("No Message",  false);
+
+        //////////////////////////////////////////////////////////////
+        ////INITIALIZATION OF FOURTH AUCTION ITEM/////////////////////
+        /////////////////////////////////////////////////////////////
+
+
+        String ItemDesciption4 = AuctionItemClientSide.get(3).ItemDescription;
+        Mycontroller.SetDescription4(ItemDesciption4);
+
+        if (AuctionItemClientSide.get(3).Sold) {//update UI for the SOLD category
+            Mycontroller.SetSold4("SOLD");
+            Mycontroller.SetWinner4(Integer.toString(AuctionItemClientSide.get(3).WinnerID));
+        }
+
+        else{ Mycontroller.SetSold4("UNSOLD");
+            Mycontroller.SetWinner4("None");}
+
+        Mycontroller.Setcurrent_bid_4(AuctionItemClientSide.get(3).CurrentBid);
+        Mycontroller.SetMinPrice_4(AuctionItemClientSide.get(3).MinPrice);
+        Mycontroller.SetMessageToUser4("No Message",  false);
+
+        //////////////////////////////////////////////////////////////
+        ////INITIALIZATION OF FIFTH AUCTION ITEM/////////////////////
+        /////////////////////////////////////////////////////////////
+        String ItemDesciption5 = AuctionItemClientSide.get(4).ItemDescription;
+        Mycontroller.SetDescription5(ItemDesciption5);
+
+        if (AuctionItemClientSide.get(4).Sold) {//update UI for the SOLD category
+            Mycontroller.SetSold5("SOLD");
+            Mycontroller.SetWinner5(Integer.toString(AuctionItemClientSide.get(4).WinnerID));
+        }
+
+        else{ Mycontroller.SetSold5("UNSOLD");
+            Mycontroller.SetWinner5("None");}
+
+        Mycontroller.Setcurrent_bid_5(AuctionItemClientSide.get(4).CurrentBid);
+        Mycontroller.SetMinPrice_5(AuctionItemClientSide.get(4).MinPrice);
+        Mycontroller.SetMessageToUser5("No Message",  false);
+
+        //////////////////////////////////////////////////////////////
+        ////INITIALIZATION OF SIXTH AUCTION ITEM/////////////////////
+        /////////////////////////////////////////////////////////////
+
+        String ItemDesciption6 = AuctionItemClientSide.get(5).ItemDescription;
+        Mycontroller.SetDescription6(ItemDesciption6);
+
+        if (AuctionItemClientSide.get(5).Sold) {//update UI for the SOLD category
+            Mycontroller.SetSold6("SOLD");
+            Mycontroller.SetWinner6(Integer.toString(AuctionItemClientSide.get(5).WinnerID));
+        }
+
+        else{ Mycontroller.SetSold6("UNSOLD");
+            Mycontroller.SetWinner6("None");}
+
+        Mycontroller.Setcurrent_bid_6(AuctionItemClientSide.get(5).CurrentBid);
+        Mycontroller.SetMinPrice_6(AuctionItemClientSide.get(5).MinPrice);
+        Mycontroller.SetMessageToUser6("No Message",  false);
+
+        /////////////////////////////////////////////////////////////
+        /////////////////SET ALL ITEM NAMES 1-6 /////////////////////
         String SetItem1 = AuctionItemClientSide.get(0).ItemName;
         Mycontroller.SetItem1(SetItem1);
         String SetItem2 = AuctionItemClientSide.get(1).ItemName;
@@ -207,10 +297,6 @@ class Client {
         Mycontroller.SetItem5(SetItem5);
         String SetItem6 = AuctionItemClientSide.get(5).ItemName;
         Mycontroller.SetItem6(SetItem6);
-
-
-
-
     }
     ///////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////
