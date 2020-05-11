@@ -14,6 +14,7 @@ public class AuctionItem implements Serializable {
     double ClosingPrice;
     int WinnerID;//who has won the Item
     String ItemDescription;
+    int SavingClientIDForRETURN;
 
 
     public AuctionItem(){
@@ -27,6 +28,7 @@ public class AuctionItem implements Serializable {
         ClosingPrice=-1;
         SetPrice = 0;
         ItemDescription =null;
+        SavingClientIDForRETURN=-1;
     }
 
 

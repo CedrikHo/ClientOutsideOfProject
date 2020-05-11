@@ -12,35 +12,23 @@ import java.util.Scanner;
 
 class Client {
 
-    static int USERID = 0;
+
+    static int USERID;
     private static String host = "127.0.0.1";
     private BufferedReader fromServer;
     protected PrintWriter toServer;
     private static controller Mycontroller;
 
-    //private Scanner consoleInput = new Scanner((System.in));
 
     static String commandPasedToConsole = "NoCommand";
     InputStream stdin = System.in;
 
-    // public BufferedReader LikeConsoleBuffer; //added by me
-    //LikeConsoleBuffer = new BufferedReader(new InputStreamReader(LikeConsole));
-    //private Scanner consoleInput = new Scanner((LikeConsole));
-
-    Client() throws Exception {
-        USERID++;
-        this.setUpNetworking();
-    }
     Client(controller Mycontroller) throws Exception {
-        USERID++;
         commandPasedToConsole = "KICKOFF";
         this.setUpNetworking();
         Client.Mycontroller = Mycontroller;
-        System.out.println(USERID);
+        USERID = -1; //FIRST TIME AROUND we have -1 everytime after should have a number
     }
-
-
-
 
     protected void sendToServer(String string) {
         System.out.println("Sending to server: " + string);
@@ -123,6 +111,7 @@ class Client {
         Mycontroller.SetMessageToUser6("No Message",  false);
 
         if (OG_MessageFromServer.command.equals("BIDFROMUSER")) {
+
             double newPrice = OG_MessageFromServer.BidPrice;
             AuctionItem ItemThatWasBidOn = OG_MessageFromServer.ListofAucitonItems.get(OG_MessageFromServer.AuctionID);
             int USERID_of_Person_Who_Bid =    ItemThatWasBidOn.WinnerID;
@@ -140,11 +129,11 @@ class Client {
                             Mycontroller.Setcurrent_bid_1(newPrice);
                         }
                     }
-                    if(OG_MessageFromServer.tooLow ){
+                    if(OG_MessageFromServer.tooLow && OG_MessageFromServer.USERID ==USERID){
                         //Warning that MinPrice is Too low
                         Mycontroller.SetMessageToUser1("REJECTED, BID TO LOW",  true);
                     }
-                    if(OG_MessageFromServer.AlreadySold){
+                    if(OG_MessageFromServer.AlreadySold && OG_MessageFromServer.USERID ==USERID  ){
                         Mycontroller.SetMessageToUser1("SOLD ALREADY!", true);
                     }
                     break;
@@ -159,11 +148,11 @@ class Client {
                             Mycontroller.Setcurrent_bid_2(newPrice);
                         }
                     }
-                    if(OG_MessageFromServer.tooLow ){
+                    if(OG_MessageFromServer.tooLow && OG_MessageFromServer.USERID ==USERID ){
                         //Warning that MinPrice is Too low
                         Mycontroller.SetMessageToUser2("REJECTED, BID TO LOW",  true);
                     }
-                    if(OG_MessageFromServer.AlreadySold){
+                    if(OG_MessageFromServer.AlreadySold &&  OG_MessageFromServer.USERID ==USERID){
                         Mycontroller.SetMessageToUser2("SOLD ALREADY!", true);
                     }
                     break;
@@ -178,11 +167,11 @@ class Client {
                             Mycontroller.Setcurrent_bid_3(newPrice);
                         }
                     }
-                    if(OG_MessageFromServer.tooLow ){
+                    if(OG_MessageFromServer.tooLow && OG_MessageFromServer.USERID ==USERID){
                         //Warning that MinPrice is Too low
                         Mycontroller.SetMessageToUser3("REJECTED, BID TO LOW",  true);
                     }
-                    if(OG_MessageFromServer.AlreadySold){
+                    if(OG_MessageFromServer.AlreadySold && OG_MessageFromServer.USERID ==USERID){
                         Mycontroller.SetMessageToUser3("SOLD ALREADY!", true);
                     }
                     break;
@@ -198,11 +187,11 @@ class Client {
                             Mycontroller.Setcurrent_bid_4(newPrice);
                         }
                     }
-                    if(OG_MessageFromServer.tooLow ){
+                    if(OG_MessageFromServer.tooLow && OG_MessageFromServer.USERID ==USERID ){
                         //Warning that MinPrice is Too low
                         Mycontroller.SetMessageToUser4("REJECTED, BID TO LOW",  true);
                     }
-                    if(OG_MessageFromServer.AlreadySold){
+                    if(OG_MessageFromServer.AlreadySold && OG_MessageFromServer.USERID ==USERID){
                         Mycontroller.SetMessageToUser4("SOLD ALREADY!", true);
                     }
                     break;
@@ -217,11 +206,11 @@ class Client {
                             Mycontroller.Setcurrent_bid_5(newPrice);
                         }
                     }
-                    if(OG_MessageFromServer.tooLow ){
+                    if(OG_MessageFromServer.tooLow && OG_MessageFromServer.USERID ==USERID){
                         //Warning that MinPrice is Too low
                         Mycontroller.SetMessageToUser5("REJECTED, BID TO LOW",  true);
                     }
-                    if(OG_MessageFromServer.AlreadySold) {
+                    if(OG_MessageFromServer.AlreadySold && OG_MessageFromServer.USERID ==USERID) {
                         Mycontroller.SetMessageToUser5("SOLD ALREADY!", true);
                     }
                     break;
@@ -235,11 +224,11 @@ class Client {
                             Mycontroller.Setcurrent_bid_6(newPrice);
                         }
                     }
-                    if(OG_MessageFromServer.tooLow ){
+                    if(OG_MessageFromServer.tooLow && OG_MessageFromServer.USERID ==USERID ){
                         //Warning that MinPrice is Too low
                         Mycontroller.SetMessageToUser6("REJECTED, BID TO LOW",  true);
                     }
-                    if(OG_MessageFromServer.AlreadySold) {
+                    if(OG_MessageFromServer.AlreadySold && OG_MessageFromServer.USERID ==USERID) {
                         Mycontroller.SetMessageToUser6("SOLD ALREADY!", true);
                     }
                 default:
@@ -248,6 +237,14 @@ class Client {
         }
 
         if (Commmand.equals("Initialization")) {
+
+
+      //if not set to -1 then we know that we've already set it so we are ok.
+            if(USERID == -1) {
+                USERID = OG_MessageFromServer.USERID;//So we Know who we are forever
+                System.out.println("USER ID WAS CHANGE FROM -1 TO " + USERID);
+            }
+            else{ System.out.println("The USER ID was not -1 SO WE DID NOT set USER ID to OG_Message");}
             InitializeMethod(OG_MessageFromServer);
         }
     }
@@ -445,7 +442,7 @@ class Client {
     static Message MessageGoingOutCurrently;//The sole message being send out. Each Client is only sending one message at a time anyways
     //so Static reference is of no worries.
 //Handler for controller class for A Bid Button Being hit.
-    public static void BidButtonHit (int ButtonNumber, String BidPrice_string)  {
+    public static void BidButtonHit(int ButtonNumber, String BidPrice_string)  {
         double BidPrice=0.0;
         if(BidPrice_string.equals("")){  return; }
 
@@ -459,6 +456,8 @@ class Client {
         }
         String Command = "BIDFROMUSER";
         int ActionID = AuctionItemClientSide.get(ButtonNumber-1).UniqueID;//get Auction ID to know what object
+        //Create a
+
         MessageGoingOutCurrently = new Message(Command, ActionID, USERID, AuctionItemClientSide, BidPrice);
         commandPasedToConsole= "BIDFROMUSER";
     }

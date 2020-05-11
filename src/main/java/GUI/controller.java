@@ -147,6 +147,7 @@ public class controller  {
     public void  ClientBid1 (ActionEvent actionEvent) throws Exception {}
     @FXML
     String path = this.getClass().getResource("/sound.mp3").toString();
+    Media m = new Media(path);
     AudioClip mediaPlayerGoodbye = new AudioClip(path);
     public void BidButtonClicked1(ActionEvent actionEvent) throws Exception {
         mediaPlayerGoodbye.play();
